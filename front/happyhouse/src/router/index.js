@@ -3,7 +3,20 @@ import VueRouter from "vue-router";
 
 Vue.use(VueRouter);
 
-const routes = [];
+const routes = [
+  {
+    path: "/",
+    component: () => import("@/views/Home.vue"),
+  },
+  {
+    path: "/apt",
+    component: () => import("@/views/Apt.vue"),
+  },
+  {
+    path: "/qna",
+    component: () => import("@/views/Qna.vue"),
+  },
+];
 
 const router = new VueRouter({
   mode: "history",
