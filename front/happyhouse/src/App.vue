@@ -1,5 +1,21 @@
 <template>
   <v-app>
+    <v-sheet class="ml-auto" max-width="700">
+      <template v-if="!user">
+        <login />
+      </template>
+      <template v-else>
+        <v-container>
+          <v-btn color="red lighten-2" dark @click="logout"> 로그아웃 </v-btn>
+        </v-container>
+      </template>
+      <!-- <v-btn class="mr-2" :input-value="active" active-class="purple white--text" depressed rounded @click="toggle">
+        로그인
+      </v-btn>
+      <v-btn class="mr-2" :input-value="active" active-class="purple white--text" depressed rounded @click="toggle">
+        회원가입
+      </v-btn> -->
+    </v-sheet>
     <Header></Header>
     <v-main>
       <router-view />
@@ -12,12 +28,28 @@
 <script>
 import Header from "@/layout/Header.vue";
 import Footer from "@/layout/Footer.vue";
+import Login from "@/components/home/Login.vue";
 
 export default {
   name: "App",
   components: {
     Header,
     Footer,
+    Login,
+  },
+  data() {
+    return {
+      user: [],
+    };
+  },
+  created() {
+    this.user = localStorage.getItem("user");
+  },
+  methods: {
+    logout() {
+      localStorage.clear();
+      this.$router.go(this.$router.currentRoute);
+    },
   },
 };
 </script>
