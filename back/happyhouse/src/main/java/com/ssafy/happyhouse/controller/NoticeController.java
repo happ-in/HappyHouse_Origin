@@ -9,13 +9,12 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+import static com.ssafy.happyhouse.utils.StringUtil.*;
+
 @RestController
 @RequestMapping("/notice")
 @CrossOrigin("*")
 public class NoticeController {
-
-    final static String SUCCESS = "success";
-    final static String FAIL = "fail";
 
     @Autowired
     NoticeService service;
@@ -31,5 +30,10 @@ public class NoticeController {
     @GetMapping
     public ResponseEntity<List<Notice>> selectAll() {
         return new ResponseEntity<>(service.selectAll(), HttpStatus.OK);
+    }
+
+    @GetMapping("/{no}")
+    public ResponseEntity<Notice> selectOne(@PathVariable("no") int noticeno) {
+        return new ResponseEntity<>(service.selectOne(noticeno), HttpStatus.OK);
     }
 }
