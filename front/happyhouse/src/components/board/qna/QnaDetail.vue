@@ -11,7 +11,7 @@
         <h2>{{ qna.title }}</h2>
       </v-col>
       <template v-if="userid === qna.userid">
-        <v-col cols="12" sm="2">
+        <v-col cols="12" sm="2" class="text-right">
           <v-chip outlined @click="moveModify">수정</v-chip>
           <v-chip outlined @click="deleteQna">삭제</v-chip>
         </v-col>
@@ -30,6 +30,7 @@
       {{ qna.content }}
     </div>
 
+    <br />
     <comment />
   </v-container>
 </template>
