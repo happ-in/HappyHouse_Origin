@@ -18,7 +18,7 @@ public class News {
         String clientSecret = "6_FYoJUrgp"; //애플리케이션 클라이언트 시크릿값"
 
         try {
-            text = URLEncoder.encode("그린팩토리", "UTF-8");
+            text = URLEncoder.encode(text, "UTF-8");
         } catch (UnsupportedEncodingException e) {
             throw new RuntimeException("검색어 인코딩 실패",e);
         }

@@ -19,7 +19,6 @@ public class NewsController {
     @GetMapping
     public String getNews(HttpServletRequest req) {
         String query = req.getParameter("query");
-
         return news.getNews(query);
     }
 }
