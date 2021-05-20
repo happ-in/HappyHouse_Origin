@@ -1,7 +1,8 @@
-package com.ssafy.happyhouse.model.service;
+package com.ssafy.happyhouse.model.service.Impl;
 
 import com.ssafy.happyhouse.model.domain.Notice;
 import com.ssafy.happyhouse.model.repository.NoticeRepository;
+import com.ssafy.happyhouse.model.service.NoticeService;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -9,7 +10,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class NoticeServiceImpl implements NoticeService{
+public class NoticeServiceImpl implements NoticeService {
 
     @Autowired
     SqlSession sqlSession;
