@@ -1,9 +1,19 @@
 <template>
-  <div>Home</div>
+  <div>
+    Home
+
+    <news-list></news-list>
+  </div>
 </template>
 
 <script>
-export default {};
-</script>
+import NewsList from "@/components/home/NewsList.vue";
 
-<style></style>
+export default {
+  name: "Home",
+
+  components: {
+    NewsList,
+  },
+};
+</script>

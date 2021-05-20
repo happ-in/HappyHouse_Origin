@@ -1,8 +1,22 @@
 <template>
-  <div id="app">
-    <router-link to="/">Home</router-link> | <router-link to="/apt">아파트정보</router-link> |
-    <router-link to="/notice">Notice</router-link> |
-    <router-link to="/qna">Qna</router-link>
-    <router-view></router-view>
-  </div>
+  <v-app>
+    <Header></Header>
+    <v-main>
+      <router-view />
+    </v-main>
+    <Footer></Footer>
+  </v-app>
 </template>
+
+<script>
+import Header from "@/layout/Header.vue";
+import Footer from "@/layout/Footer.vue";
+
+export default {
+  name: "App",
+  components: {
+    Header,
+    Footer,
+  },
+};
+</script>
