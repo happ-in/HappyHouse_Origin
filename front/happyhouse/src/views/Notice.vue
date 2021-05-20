@@ -1,8 +1,8 @@
 <template>
-  <div>
-    <h2>Notice</h2>
+  <v-container>
+    <h1 class="text-center">공지사항</h1>
     <router-view></router-view>
-  </div>
+  </v-container>
 </template>
 
 <script>

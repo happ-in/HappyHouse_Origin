@@ -1,9 +1,13 @@
 <template>
   <v-container>
     <v-row>
-      <v-col class="d-flex">
+      <v-col cols="12" sm="6">
         <v-btn class="d-flex" elevation="1" medium @click="moveCreate">글쓰기</v-btn>
+      </v-col>
+      <v-col cols="12" sm="2">
         <v-select :items="items" item-text="state" item-value="abbr"></v-select>
+      </v-col>
+      <v-col cols="12" sm="4">
         <v-text-field class="d-flex"></v-text-field>
       </v-col>
     </v-row>
