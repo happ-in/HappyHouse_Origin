@@ -1,9 +1,40 @@
 <template>
-  <div>qna</div>
+  <v-container fluid>
+    <v-text-field label="Title" v-model="title" hide-details="auto"></v-text-field><br />
+    <v-textarea outlined label="Content" v-model="content" hide-details="auto"></v-textarea>
+    <v-btn elevation="2" @click="registNotice">등록</v-btn>
+  </v-container>
 </template>
 
 <script>
-export default {};
+import axios from "axios";
+export default {
+  data: () => ({
+    title: "",
+    content: "",
+    username: "",
+  }),
+  methods: {
+    registNotice() {
+      axios
+        .post("http://localhost:8888/happyhouse/qna", {
+          username: this.username,
+          title: this.title,
+          content: this.content,
+        })
+        .then(() => {
+          alert("질문이 등록됐습니다.");
+          this.$router.push("/qna");
+        })
+        .catch(() => {
+          alert("질문 등록에 실패했습니다.");
+        });
+    },
+  },
+  created() {
+    this.username = JSON.parse(localStorage.getItem("user")).username;
+  },
+};
 </script>
 
 <style></style>
