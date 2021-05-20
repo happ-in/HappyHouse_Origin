@@ -7,6 +7,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/notice")
 @CrossOrigin("*")
@@ -24,5 +26,10 @@ public class NoticeController {
             return new ResponseEntity<>(SUCCESS, HttpStatus.OK);
         }
         return new ResponseEntity<>(FAIL, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    @GetMapping
+    public ResponseEntity<List<Notice>> selectAll() {
+        return new ResponseEntity<>(service.selectAll(), HttpStatus.OK);
     }
 }

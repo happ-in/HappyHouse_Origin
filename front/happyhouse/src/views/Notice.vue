@@ -1,26 +1,12 @@
 <template>
   <div>
-    Board
-    <notice-list></notice-list>
-    <notice-detail></notice-detail>
+    <h2>Notice</h2>
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
-import NoticeList from "@/components/board/notice/NoticeList.vue";
-import NoticeDetail from "@/components/board/notice/NoticeDetail.vue";
-
-export default {
-  name: "Notice",
-  components: {
-    NoticeList,
-    NoticeDetail,
-  },
-  data() {
-    return {};
-  },
-  methods: {},
-};
+export default {};
 </script>
 
 <style></style>

@@ -19,14 +19,14 @@ const routes = [
   },
   {
     path: "/notice",
-    component: () => import("@/components/board/notice/Notice.vue"),
+    component: () => import("@/views/Notice.vue"),
     children: [
       {
         path: "/",
         component: () => import("@/components/board/notice/NoticeList.vue"),
       },
       {
-        path: "detail",
+        path: "detail/:no",
         component: () => import("@/components/board/notice/NoticeDetail.vue"),
       },
       {
