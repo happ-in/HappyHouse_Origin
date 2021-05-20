@@ -23,7 +23,7 @@ public class News {
             throw new RuntimeException("검색어 인코딩 실패",e);
         }
 
-        String apiURL = "https://openapi.naver.com/v1/search/news?query=" + text;    // json 결과
+        String apiURL = "https://openapi.naver.com/v1/search/news?query=" + text + "&display=5";    // json 결과
         //String apiURL = "https://openapi.naver.com/v1/search/blog.xml?query="+ text; // xml 결과
 
         Map<String, String> requestHeaders = new HashMap<>();
