@@ -6,8 +6,8 @@ Vue.use(VueRouter);
 const routes = [
   {
     path: "/",
-    // component: () => import("@/views/Home.vue"),
-    component: () => import("@/components/home/NewsList.vue"),
+    component: () => import("@/views/Home.vue"),
+    // component: () => import("@/components/home/NewsList.vue"),
   },
   {
     path: "/apt",
