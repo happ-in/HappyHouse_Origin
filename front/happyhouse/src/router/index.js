@@ -29,6 +29,10 @@ const routes = [
         path: "detail/:no",
         component: () => import("@/components/board/qna/QnaDetail.vue"),
       },
+      {
+        path: "modify/:no",
+        component: () => import("@/components/board/qna/QnaModify.vue"),
+      },
     ],
   },
   {

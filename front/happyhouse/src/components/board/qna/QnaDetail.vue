@@ -7,9 +7,15 @@
           Q&A
         </v-btn>
       </v-col>
-      <v-col>
+      <v-col cols="12" sm="9">
         <h2>{{ qna.title }}</h2>
       </v-col>
+      <template v-if="userid === qna.userid">
+        <v-col cols="12" sm="2">
+          <v-chip outlined @click="moveModify">수정</v-chip>
+          <v-chip outlined @click="deleteQna">삭제</v-chip>
+        </v-col>
+      </template>
     </v-row>
     <hr />
     <br />
@@ -37,12 +43,38 @@ export default {
   data() {
     return {
       qna: [],
+      userid: "",
     };
   },
   created() {
-    axios.get(`http://localhost:8888/happyhouse/qna/${this.$route.params.no}`).then(({ data }) => {
-      this.qna = data;
-    });
+    axios
+      .get(`http://localhost:8888/happyhouse/qna/${this.$route.params.no}`)
+      .then(({ data }) => {
+        this.qna = data;
+      })
+      .catch(() => {
+        alert("Error!");
+      });
+    this.userid = JSON.parse(localStorage.getItem("user")).userid;
+  },
+  methods: {
+    deleteQna() {
+      axios
+        .delete(`http://localhost:8888/happyhouse/qna/${this.$route.params.no}`)
+        .then(() => {
+          alert("QnA를 삭제했습니다.");
+          this.moveList();
+        })
+        .catch(() => {
+          alert("QnA 삭제 실패!");
+        });
+    },
+    moveList() {
+      this.$router.push("/qna");
+    },
+    moveModify() {
+      this.$router.push(`/qna/modify/${this.$route.params.no}`);
+    },
   },
 };
 </script>
