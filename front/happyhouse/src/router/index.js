@@ -15,14 +15,23 @@ const routes = [
   {
     path: "/qna",
     component: () => import("@/components/board/qna/QnaCreate.vue"),
+    children: [],
   },
   {
     path: "/notice",
     component: () => import("@/components/board/notice/Notice.vue"),
     children: [
       {
+        path: "/",
+        component: () => import("@/components/board/notice/NoticeList.vue"),
+      },
+      {
         path: "detail",
         component: () => import("@/components/board/notice/NoticeDetail.vue"),
+      },
+      {
+        path: "create",
+        component: () => import("@/components/board/notice/NoticeCreate.vue"),
       },
     ],
   },
