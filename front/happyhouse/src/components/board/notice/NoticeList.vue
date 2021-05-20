@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <v-row no-gutters>
+    <v-row>
       <v-col class="d-flex">
         <v-btn class="d-flex" elevation="1" medium @click="moveCreate">글쓰기</v-btn>
         <v-select :items="items" item-text="state" item-value="abbr"></v-select>

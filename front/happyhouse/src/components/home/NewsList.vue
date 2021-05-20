@@ -1,9 +1,11 @@
 <template>
-  <div>sad</div>
+  <div>
+    {{ newsList }}
+  </div>
 </template>
 
 <script>
-// import axios from "axios";
+import axios from "axios";
 
 export default {
   data() {
@@ -12,17 +14,18 @@ export default {
     };
   },
   created() {
-    // const ID_KEY = "Hi4cPiqKCy_OlS7S6DR_";
-    // const SECRET_KEY = "6_FYoJUrgp";
-    // axios.get("https://openapi.naver.com/v1/search/news.json", {
-    //   params: {
-    //     query: "부동산",
-    //   },
-    //   headers: {
-    //     "X-Naver-Client-Id": ID_KEY,
-    //     "X-Naver-Client-Secret": SECRET_KEY,
-    //   },
-    // });
+    axios
+      .get("http://localhost:8888/happyhouse/news", {
+        params: {
+          query: "삼성",
+        },
+      })
+      .then(({ data }) => {
+        this.newsList = data;
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   },
 };
 </script>
