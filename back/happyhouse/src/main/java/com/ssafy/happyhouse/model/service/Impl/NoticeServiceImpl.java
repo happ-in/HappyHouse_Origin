@@ -24,4 +24,9 @@ public class NoticeServiceImpl implements NoticeService {
     public boolean insert(Notice notice) {
         return sqlSession.getMapper(NoticeRepository.class).insert(notice) == 1;
     }
+
+    @Override
+    public Notice selectOne(int noticeno) {
+        return sqlSession.getMapper(NoticeRepository.class).selectOne(noticeno);
+    }
 }

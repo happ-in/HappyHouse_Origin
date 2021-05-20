@@ -31,7 +31,6 @@
         </tbody>
       </template>
     </v-simple-table>
-    <router-link to="/notice/detail">List</router-link>
   </v-container>
 </template>
 
@@ -51,7 +50,6 @@ export default {
     axios
       .get("http://localhost:8888/happyhouse/notice")
       .then(({ data }) => {
-        console.log(data);
         this.notices = data;
       })
       .catch(() => {});

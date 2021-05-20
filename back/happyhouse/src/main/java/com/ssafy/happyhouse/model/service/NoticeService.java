@@ -10,4 +10,7 @@ public interface NoticeService {
 
     // 글 등록
     boolean insert(Notice notice);
+
+    // 글 단건조회
+    Notice selectOne(int noticeno);
 }
