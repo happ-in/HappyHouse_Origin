@@ -24,7 +24,7 @@ export default {
       axios
         .post("http://localhost:8888/happyhouse/notice", {
           userid: "1",
-          subject: this.title,
+          title: this.title,
           content: this.content,
         })
         .then(() => {
