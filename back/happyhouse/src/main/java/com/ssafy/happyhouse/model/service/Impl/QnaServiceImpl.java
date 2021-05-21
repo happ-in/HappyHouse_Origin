@@ -1,6 +1,7 @@
 package com.ssafy.happyhouse.model.service.Impl;
 
 import com.ssafy.happyhouse.model.domain.Qna;
+import com.ssafy.happyhouse.model.domain.Search;
 import com.ssafy.happyhouse.model.repository.QnaRepository;
 import com.ssafy.happyhouse.model.service.QnaService;
 import org.apache.ibatis.session.SqlSession;
@@ -40,4 +41,12 @@ public class QnaServiceImpl implements QnaService {
 
     @Override
     public int count() { return sqlSession.getMapper(QnaRepository.class).count(); }
+
+    @Override
+    public List<Qna> findByKeyword(Search search) { return sqlSession.getMapper(QnaRepository.class).findByKeyword(search); }
+
+
+    @Override
+    public int findByKeywordCount(Search search) { return sqlSession.getMapper(QnaRepository.class).findByKeywordCount(search); }
+
 }

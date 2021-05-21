@@ -1,12 +1,15 @@
 package com.ssafy.happyhouse.controller;
 
 import com.ssafy.happyhouse.model.domain.Qna;
+import com.ssafy.happyhouse.model.domain.Search;
 import com.ssafy.happyhouse.model.service.QnaService;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletRequest;
 
 import static com.ssafy.happyhouse.utils.StringUtil.*;
 
@@ -54,4 +57,22 @@ public class QnaController {
     public ResponseEntity<Qna> selectOne(@PathVariable("id") int id) {
         return new ResponseEntity<>(service.selectOne(id), HttpStatus.OK);
     }
+
+    @GetMapping("/search")
+    public ResponseEntity<ListDto> selectByKeyword(HttpServletRequest request) {
+        int page = Integer.parseInt(request.getParameter("page"));
+        Search search = new Search();
+        search.setTitle(request.getParameter("title"));
+        search.setContent(request.getParameter("content"));
+        search.setOffset((page-1) * SIZE);
+        int length = (service.findByKeywordCount(search) + SIZE)/SIZE;
+        return new ResponseEntity<>(new ListDto(service.findByKeyword(search), page, length), HttpStatus.OK);
+    }
+
+//    @GetMapping("/search/{page}")
+//    public ResponseEntity<ListDto> selectByKeyword(@RequestBody Search search, @PathVariable("page") int page) {
+//        search.setOffset((search.getOffset() - 1) *SIZE);
+//        int length = (service.findByKeywordCount(search) + SIZE)/SIZE;
+//        return new ResponseEntity<>(new ListDto<>(service.findByKeyword(search), page, length), HttpStatus.OK);
+//    }
 }

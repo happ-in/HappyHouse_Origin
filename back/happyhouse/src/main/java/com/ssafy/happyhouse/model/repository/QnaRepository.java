@@ -1,6 +1,7 @@
 package com.ssafy.happyhouse.model.repository;
 
 import com.ssafy.happyhouse.model.domain.Qna;
+import com.ssafy.happyhouse.model.domain.Search;
 
 import java.util.List;
 
@@ -21,4 +22,10 @@ public interface QnaRepository {
     int insert(Qna qna);
 
     int count();
+
+    // 검색
+    List<Qna> findByKeyword(Search search);
+
+    // 검색 카운트
+    int findByKeywordCount(Search search);
 }

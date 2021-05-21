@@ -5,10 +5,16 @@
         <v-btn class="d-flex" elevation="1" medium @click="moveCreate">글쓰기</v-btn>
       </v-col>
       <v-col cols="12" sm="2">
-        <v-select :items="items" item-text="state" item-value="abbr"></v-select>
+        <v-select v-model="select" :items="items" item-text="state" item-value="abbr"></v-select>
       </v-col>
+
       <v-col cols="12" sm="4">
-        <v-text-field class="d-flex" placeholder="검색"></v-text-field>
+        <v-text-field
+          class="d-flex"
+          placeholder="검색"
+          v-model="keyword"
+          @keyup.enter="searchByKeyword(1)"
+        ></v-text-field>
       </v-col>
     </v-row>
     <v-simple-table>
@@ -44,26 +50,24 @@
 
 <script>
 import axios from "axios";
+
+let baseURL = `http://localhost:8888/happyhouse/qna/`;
 export default {
   data() {
     return {
       qnas: [],
+      select: "title",
       items: [
         { state: "제목", abbr: "title" },
         { state: "내용", abbr: "content" },
       ],
       page: 1,
       length: 0,
+      keyword: "",
     };
   },
   created() {
-    axios
-      .get(`http://localhost:8888/happyhouse/qna/list/${this.page}`)
-      .then(({ data }) => {
-        this.qnas = data.list;
-        this.length = data.length;
-      })
-      .catch(() => {});
+    this.searchAll();
   },
   methods: {
     moveCreate() {
@@ -73,16 +77,59 @@ export default {
         alert("로그인 후 이용 가능합니다!");
       }
     },
-  },
-  watch: {
-    page: function () {
+    searchByKeyword(pageno) {
+      console.log(this.select);
+      if (this.keyword && this.select === "title") {
+        axios
+          .get(baseURL + "search", {
+            params: {
+              title: this.keyword,
+              content: "",
+              page: pageno,
+            },
+          })
+          .then(({ data }) => {
+            this.qnas = data.list;
+            this.page = data.page;
+            this.length = data.length;
+          })
+          .catch(() => {});
+      } else if (this.keyword && this.select === "content") {
+        axios
+          .get(baseURL + "search", {
+            params: {
+              title: "",
+              content: this.keyword,
+              page: 1,
+            },
+          })
+          .then(({ data }) => {
+            this.qnas = data.list;
+            this.page = data.page;
+            this.length = data.length;
+          })
+          .catch(() => {});
+      } else {
+        this.searchAll();
+      }
+    },
+    searchAll() {
       axios
-        .get(`http://localhost:8888/happyhouse/qna/list/${this.page}`)
+        .get(baseURL + "list/" + this.page)
         .then(({ data }) => {
           this.qnas = data.list;
           this.length = data.length;
         })
         .catch(() => {});
+    },
+  },
+  watch: {
+    page: function () {
+      if (this.keyword) {
+        this.searchByKeyword(this.page);
+      } else {
+        this.searchAll();
+      }
     },
   },
 };

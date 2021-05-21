@@ -35,4 +35,29 @@
         select  count(*)
         from    qna
     </select>
+    
+    <select id="findByKeyword" parameterType="search" resultType="qna">
+        select  *
+        from    qna
+        <if test="title == null || title == ''">
+            where content like concat('%', #{content}, '%')
+        </if>
+        <if test="content == null || content == ''">
+            where title like concat('%', #{title}, '%')
+        </if>
+        limit   10
+        offset  #{offset}
+    </select>
+
+    <select id="findByKeywordCount" parameterType="search" resultType="int">
+        select  count(*)
+        from    qna
+        <if test="title == null || title == ''">
+            where content like concat('%', #{content}, '%')
+        </if>
+        <if test="content == null || content == ''">
+            where title like concat('%', #{title}, '%')
+        </if>
+    </select>
+
 </mapper>

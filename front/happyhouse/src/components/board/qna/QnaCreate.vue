@@ -1,9 +1,13 @@
 <template>
   <v-container fluid>
-    <v-text-field label="Title" v-model="title" hide-details="auto"></v-text-field><br />
-    <v-textarea outlined label="Content" v-model="content" hide-details="auto"></v-textarea>
-    <v-btn elevation="2" @click="moveList">취소</v-btn>
-    <v-btn elevation="2" @click="registNotice">등록</v-btn>
+    <v-container>
+      <v-text-field label="Title" v-model="title" hide-details="auto"></v-text-field><br />
+      <v-textarea outlined label="Content" v-model="content" hide-details="auto"></v-textarea>
+      <v-col class="text-right">
+        <v-btn elevation="2" @click="moveList" class="mr-3">취소</v-btn>
+        <v-btn elevation="2" @click="registQna">등록</v-btn>
+      </v-col>
+    </v-container>
   </v-container>
 </template>
 
@@ -17,7 +21,7 @@ export default {
     userid: "",
   }),
   methods: {
-    registNotice() {
+    registQna() {
       axios
         .post("http://localhost:8888/happyhouse/qna", {
           username: this.username,
