@@ -1,9 +1,10 @@
 <template>
   <v-app>
     <v-sheet class="ml-auto" max-width="700">
-      <template v-if="!user">
+      <div v-if="!user" class="d-flex">
         <login />
-      </template>
+        <join />
+      </div>
       <template v-else>
         <v-container>
           <v-btn color="red lighten-2" dark @click="logout"> 로그아웃 </v-btn>
@@ -29,6 +30,7 @@
 import Header from "@/layout/Header.vue";
 import Footer from "@/layout/Footer.vue";
 import Login from "@/components/home/Login.vue";
+import Join from "@/components/home/Join.vue";
 
 export default {
   name: "App",
@@ -36,6 +38,7 @@ export default {
     Header,
     Footer,
     Login,
+    Join,
   },
   data() {
     return {
