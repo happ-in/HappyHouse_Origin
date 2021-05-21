@@ -45,4 +45,9 @@ public class NoticeServiceImpl implements NoticeService {
     public int findByKeywordCount(Search search) {
         return sqlSession.getMapper(NoticeRepository.class).findByKeywordCount(search);
     }
+
+    @Override
+    public boolean delete(int noticeno) {
+        return sqlSession.getMapper(NoticeRepository.class).delete(noticeno) == 1;
+    }
 }

@@ -50,4 +50,12 @@ public class NoticeController {
         int length = (service.findByKeywordCount(search) + SIZE)/SIZE;
         return  new ResponseEntity<>(new ListDto(service.findByKeyword(search), page, length), HttpStatus.OK);
     }
+
+    @DeleteMapping("/{no}")
+    public ResponseEntity<String> delete(@PathVariable("no") int noticeno) {
+        if(service.delete(noticeno)) {
+            return new ResponseEntity<>(SUCCESS, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(FAIL, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
 }

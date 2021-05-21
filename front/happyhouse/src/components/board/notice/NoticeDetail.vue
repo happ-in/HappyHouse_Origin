@@ -7,15 +7,23 @@
           공지
         </v-btn>
       </v-col>
-      <v-col>
-        <h2>{{ notice.subject }}</h2>
+      <v-col cols="12" sm="9">
+        <h2>{{ notice.title }}</h2>
       </v-col>
+      <template v-if="userid === notice.userid">
+        <v-col cols="12" sm="2" class="text-right">
+          <v-chip outlined @click="deleteNotice">삭제</v-chip>
+        </v-col>
+      </template>
+    </v-row>
+    <hr />
+    <br />
+    <v-row>
       <v-col cols="12" sm="2">
         <h5>작성일 : {{ notice.regtime }}</h5>
       </v-col>
     </v-row>
 
-    <hr />
     <br />
 
     <div class="border">
@@ -29,12 +37,27 @@ export default {
   data() {
     return {
       notice: [],
+      userid: "",
     };
   },
   created() {
+    this.userid = JSON.parse(localStorage.getItem("user")).userid;
     axios.get(`http://localhost:8888/happyhouse/notice/${this.$route.params.no}`).then(({ data }) => {
       this.notice = data;
     });
+  },
+  methods: {
+    deleteNotice() {
+      axios
+        .delete(`http://localhost:8888/happyhouse/notice/${this.$route.params.no}`)
+        .then(() => {
+          alert("공지사항을 삭제했습니다.");
+          this.$router.push("/notice");
+        })
+        .catch(() => {
+          alert("공지사항 삭제에 실패했습니다.");
+        });
+    },
   },
 };
 </script>

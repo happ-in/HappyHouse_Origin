@@ -5,6 +5,7 @@
     <select id="selectAll" parameterType="int" resultType="qna">
         select  *
         from    qna
+        order by mod_date desc
         limit   10
         offset  #{offset}
     </select>
@@ -45,6 +46,7 @@
         <if test="content == null || content == ''">
             where title like concat('%', #{title}, '%')
         </if>
+        order by mod_date desc
         limit   10
         offset  #{offset}
     </select>

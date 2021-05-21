@@ -10,6 +10,7 @@
     <select id="selectAll" parameterType="int" resultType="notice">
         select  *
         from    notice
+        order by regtime desc
         limit   10
         offset  #{offset}
     </select>
@@ -34,6 +35,7 @@
         <if test="content == null || content == ''">
             where title like concat('%', #{title}, '%')
         </if>
+        order by regtime desc
         limit   10
         offset  #{offset}
     </select>
@@ -48,4 +50,11 @@
             where title like concat('%', #{title}, '%')
         </if>
     </select>
+
+
+    <delete id="delete" parameterType="int">
+        delete
+        from    notice
+        where   noticeno=#{noticeno}
+    </delete>
 </mapper>

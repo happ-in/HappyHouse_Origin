@@ -23,7 +23,7 @@ export default {
     registNotice() {
       axios
         .post("http://localhost:8888/happyhouse/notice", {
-          userid: "1",
+          userid: JSON.parse(localStorage.getItem("user")).userid,
           title: this.title,
           content: this.content,
         })

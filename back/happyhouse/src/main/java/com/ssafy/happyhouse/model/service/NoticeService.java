@@ -22,4 +22,7 @@ public interface NoticeService {
 
     // 키워드로 검색글 수
     int findByKeywordCount(Search search);
+
+    // 삭제
+    boolean delete(int noticeno);
 }
