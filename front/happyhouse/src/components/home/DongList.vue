@@ -5,7 +5,7 @@
     <v-card class="overflow-y-auto mx-auto" max-height="450" tile>
       <v-list flat>
         <v-list-item-group v-model="selectedItem">
-          <v-list-item v-for="(item, i) in dongs" :key="i">
+          <v-list-item v-for="(item, i) in dongs" :key="i" @click="change">
             <v-list-item-content>
               <v-list-item-title v-text="item"></v-list-item-title>
             </v-list-item-content>
@@ -28,6 +28,12 @@ export default {
     selectedItem: 1,
     items: [],
   }),
+
+  methods: {
+    change() {
+      this.$router.push("/apt");
+    },
+  },
 };
 </script>
 

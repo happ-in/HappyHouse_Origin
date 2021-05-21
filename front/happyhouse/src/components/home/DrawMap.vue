@@ -47,7 +47,6 @@ export default {
         polygon.setOptions({ fillColor: "#09f" });
 
         customOverlay.setContent('<div class="area">' + area.name + "</div>");
-
         customOverlay.setPosition(mouseEvent.latLng);
         customOverlay.setMap(map);
       });
