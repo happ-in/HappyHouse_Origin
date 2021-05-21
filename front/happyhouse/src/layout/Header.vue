@@ -13,24 +13,12 @@
         <div class="header_title">행복한 우리집</div>
       </v-img>
 
-      <!-- <v-card-title class="text-center justify-center py-6">
-        <h1 class="font-weight-bold display-3 basil--text">HAPPY HOUSE</h1>
-      </v-card-title> -->
-
       <v-tabs fixed-tabs background-color="indigo" dark>
         <v-tab @click="$router.push('/')"> 홈 </v-tab>
         <v-tab @click="$router.push('/notice')"> 공지사항 </v-tab>
         <v-tab @click="$router.push('/qna')"> Q & A </v-tab>
-        <v-tab> 마이 페이지 </v-tab>
+        <v-tab @click="checkLogin"> 마이 페이지 </v-tab>
       </v-tabs>
-
-      <!-- <v-tabs-items v-model="tab">
-        <v-tab-item v-for="item in items" :key="item">
-          <v-card flat>
-            <router-link to=""></router-link>
-          </v-card>
-        </v-tab-item>
-      </v-tabs-items> -->
     </v-card>
   </div>
 </template>
@@ -41,6 +29,16 @@ export default {
     return {
       items: ["Home", "Notice", "Q&A", "My Page"],
     };
+  },
+  methods: {
+    checkLogin() {
+      if (localStorage.getItem("user")) {
+        this.$router.push("/mypage");
+      } else {
+        alert("로그인 후 이용 가능합니다!");
+        this.$router.push("/");
+      }
+    },
   },
 };
 </script>
@@ -57,8 +55,7 @@ export default {
 
 @font-face {
   font-family: "this_is_font_name";
-  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_tway@1.0/twayair.woff")
-    format("woff");
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_tway@1.0/twayair.woff") format("woff");
 
   font-weight: normal;
   font-style: normal;

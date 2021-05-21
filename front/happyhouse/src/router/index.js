@@ -53,6 +53,12 @@ const routes = [
       },
     ],
   },
+
+  {
+    path: "/mypage",
+    component: () => import("@/views/MyPage.vue"),
+    children: [],
+  },
 ];
 
 const router = new VueRouter({
