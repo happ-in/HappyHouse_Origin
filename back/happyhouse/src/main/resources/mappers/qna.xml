@@ -2,9 +2,11 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ssafy.happyhouse.model.repository.QnaRepository">
-    <select id="selectAll" resultType="qna">
+    <select id="selectAll" parameterType="int" resultType="qna">
         select  *
         from    qna
+        limit   10
+        offset  #{offset}
     </select>
 
     <select id="selectOne" parameterType="int" resultType="qna">
@@ -28,4 +30,9 @@
         delete  from qna
         where   id=#{id}
     </delete>
+
+    <select id="count" resultType="int">
+        select  count(*)
+        from    qna
+    </select>
 </mapper>

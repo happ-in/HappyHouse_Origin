@@ -18,7 +18,7 @@ const routes = [
     component: () => import("@/views/Qna.vue"),
     children: [
       {
-        path: "/",
+        path: "",
         component: () => import("@/components/board/qna/QnaList.vue"),
       },
       {

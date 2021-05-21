@@ -8,7 +8,7 @@
         <v-select :items="items" item-text="state" item-value="abbr"></v-select>
       </v-col>
       <v-col cols="12" sm="4">
-        <v-text-field class="d-flex"></v-text-field>
+        <v-text-field class="d-flex" placeholder="검색"></v-text-field>
       </v-col>
     </v-row>
     <v-simple-table>
@@ -33,6 +33,12 @@
         </tbody>
       </template>
     </v-simple-table>
+
+    <template>
+      <div class="text-center">
+        <v-pagination v-model="page" :length="length" circle></v-pagination>
+      </div>
+    </template>
   </v-container>
 </template>
 
@@ -46,13 +52,16 @@ export default {
         { state: "제목", abbr: "title" },
         { state: "내용", abbr: "content" },
       ],
+      page: 1,
+      length: 0,
     };
   },
   created() {
     axios
-      .get("http://localhost:8888/happyhouse/qna")
+      .get(`http://localhost:8888/happyhouse/qna/list/${this.page}`)
       .then(({ data }) => {
-        this.qnas = data;
+        this.qnas = data.list;
+        this.length = data.length;
       })
       .catch(() => {});
   },
@@ -63,6 +72,17 @@ export default {
       } else {
         alert("로그인 후 이용 가능합니다!");
       }
+    },
+  },
+  watch: {
+    page: function () {
+      axios
+        .get(`http://localhost:8888/happyhouse/qna/list/${this.page}`)
+        .then(({ data }) => {
+          this.qnas = data.list;
+          this.length = data.length;
+        })
+        .catch(() => {});
     },
   },
 };

@@ -16,9 +16,7 @@ public class QnaServiceImpl implements QnaService {
     SqlSession sqlSession;
 
     @Override
-    public List<Qna> selectAll() {
-        return sqlSession.getMapper(QnaRepository.class).selectAll();
-    }
+    public List<Qna> selectAll(int offset) { return sqlSession.getMapper(QnaRepository.class).selectAll(offset); }
 
     @Override
     public Qna selectOne(int id) {
@@ -39,4 +37,7 @@ public class QnaServiceImpl implements QnaService {
     public boolean insert(Qna qna) {
         return sqlSession.getMapper(QnaRepository.class).insert(qna) == 1;
     }
+
+    @Override
+    public int count() { return sqlSession.getMapper(QnaRepository.class).count(); }
 }

@@ -2,13 +2,11 @@ package com.ssafy.happyhouse.controller;
 
 import com.ssafy.happyhouse.model.domain.Qna;
 import com.ssafy.happyhouse.model.service.QnaService;
-import org.apache.ibatis.annotations.Delete;
+import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 import static com.ssafy.happyhouse.utils.StringUtil.*;
 
@@ -16,6 +14,8 @@ import static com.ssafy.happyhouse.utils.StringUtil.*;
 @CrossOrigin("*")
 @RequestMapping("/qna")
 public class QnaController {
+
+    private static final int SIZE = 10;
 
     @Autowired
     QnaService service;
@@ -44,9 +44,10 @@ public class QnaController {
         return new ResponseEntity<>(FAIL, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
-    @GetMapping
-    public ResponseEntity<List<Qna>> selectAll() {
-        return new ResponseEntity<>(service.selectAll(), HttpStatus.OK);
+    @GetMapping("/list/{page}")
+    public ResponseEntity<ListDto> selectAll(@PathVariable("page") int page) {
+        int offset = (page - 1) * SIZE;
+        return new ResponseEntity<>(new ListDto<>(service.selectAll(offset), page,(service.count() + SIZE)/SIZE), HttpStatus.OK);
     }
 
     @GetMapping("/{id}")

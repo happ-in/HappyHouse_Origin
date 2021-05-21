@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface QnaService {
     // 전체조회
-    List<Qna> selectAll();
+    List<Qna> selectAll(int offset);
 
     // 단건조회
     Qna selectOne(int id);
@@ -19,4 +19,7 @@ public interface QnaService {
 
     // 등록
     boolean insert(Qna qna);
+
+    // 전체 글 개수
+    int count();
 }
