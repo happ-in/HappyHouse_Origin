@@ -17,9 +17,6 @@ import static com.ssafy.happyhouse.utils.StringUtil.*;
 @CrossOrigin("*")
 @RequestMapping("/qna")
 public class QnaController {
-
-    private static final int SIZE = 10;
-
     @Autowired
     QnaService service;
 
@@ -58,7 +55,7 @@ public class QnaController {
         return new ResponseEntity<>(service.selectOne(id), HttpStatus.OK);
     }
 
-    @GetMapping("/search")
+    @GetMapping("/list")
     public ResponseEntity<ListDto> selectByKeyword(HttpServletRequest request) {
         int page = Integer.parseInt(request.getParameter("page"));
         Search search = new Search();
@@ -69,10 +66,4 @@ public class QnaController {
         return new ResponseEntity<>(new ListDto(service.findByKeyword(search), page, length), HttpStatus.OK);
     }
 
-//    @GetMapping("/search/{page}")
-//    public ResponseEntity<ListDto> selectByKeyword(@RequestBody Search search, @PathVariable("page") int page) {
-//        search.setOffset((search.getOffset() - 1) *SIZE);
-//        int length = (service.findByKeywordCount(search) + SIZE)/SIZE;
-//        return new ResponseEntity<>(new ListDto<>(service.findByKeyword(search), page, length), HttpStatus.OK);
-//    }
 }

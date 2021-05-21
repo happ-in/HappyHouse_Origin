@@ -78,10 +78,9 @@ export default {
       }
     },
     searchByKeyword(pageno) {
-      console.log(this.select);
       if (this.keyword && this.select === "title") {
         axios
-          .get(baseURL + "search", {
+          .get(baseURL + "list", {
             params: {
               title: this.keyword,
               content: "",
@@ -96,11 +95,11 @@ export default {
           .catch(() => {});
       } else if (this.keyword && this.select === "content") {
         axios
-          .get(baseURL + "search", {
+          .get(baseURL + "list", {
             params: {
               title: "",
               content: this.keyword,
-              page: 1,
+              page: pageno,
             },
           })
           .then(({ data }) => {
