@@ -1,11 +1,15 @@
 <template>
   <div id="app">
-    <div id="map"></div>
+    <div id="map" @click="sendKeyword"></div>
   </div>
 </template>
 
 <script>
+import { mapActions } from "vuex";
+
 export default {
+  name: "DrawMap",
+
   mounted() {
     if (window.kakao && window.kakao.maps) {
       this.initMap();
@@ -20,6 +24,11 @@ export default {
     }
   },
   methods: {
+    ...mapActions(["getDongList"]),
+    sendKeyword(areaname) {
+      this.getDongList(areaname);
+    },
+
     displayArea(area, map, customOverlay, infowindow) {
       // 다각형을 생성합니다
       var polygon = new kakao.maps.Polygon({
@@ -56,8 +65,9 @@ export default {
       });
 
       // 다각형에 click 이벤트를 등록하고 이벤트가 발생하면 다각형의 이름과 면적을 인포윈도우에 표시합니다
-      kakao.maps.event.addListener(polygon, "click", function (mouseEvent) {
+      kakao.maps.event.addListener(polygon, "click", (mouseEvent) => {
         var content =
+          "<v-card>" +
           '<div class="info">' +
           '   <div class="title">' +
           area.name +
@@ -65,7 +75,10 @@ export default {
           '   <div class="size">총 면적 : 약 ' +
           Math.floor(polygon.getArea()) +
           " m<sup>2</sup></area>" +
-          "</div>";
+          "</div>" +
+          "</v-card>";
+
+        this.sendKeyword(area.name);
 
         infowindow.setContent(content);
         infowindow.setPosition(mouseEvent.latLng);
@@ -3717,6 +3730,7 @@ export default {
           center: new kakao.maps.LatLng(37.566826, 126.9818567), // 지도의 중심좌표
           draggable: false, // 지도 고정
           level: 9, // 지도의 확대 레벨
+          disableDoubleClick: true,
         };
 
       var map = new kakao.maps.Map(mapContainer, mapOption),

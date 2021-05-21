@@ -1,6 +1,6 @@
 <template>
   <v-card class="pa-1">
-    <h1 class="text-center">오늘의 뉴스</h1>
+    <h2 class="header_title">오늘의 뉴스</h2>
     <v-hover
       v-slot="{ hover }"
       class="ma-1 mb-4"
@@ -53,4 +53,18 @@ export default {
 };
 </script>
 
-<style></style>
+<style scoped>
+@font-face {
+  font-family: "this_is_font_name";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_tway@1.0/twaysky.woff")
+    format("woff");
+
+  font-weight: normal;
+  font-style: normal;
+}
+
+.header_title {
+  text-align: center;
+  font-family: this_is_font_name;
+}
+</style>
