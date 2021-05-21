@@ -1,6 +1,7 @@
 package com.ssafy.happyhouse.model.service.Impl;
 
 import com.ssafy.happyhouse.model.domain.Notice;
+import com.ssafy.happyhouse.model.domain.Search;
 import com.ssafy.happyhouse.model.repository.NoticeRepository;
 import com.ssafy.happyhouse.model.service.NoticeService;
 import org.apache.ibatis.session.SqlSession;
@@ -16,8 +17,8 @@ public class NoticeServiceImpl implements NoticeService {
     SqlSession sqlSession;
 
     @Override
-    public List<Notice> selectAll() {
-        return sqlSession.getMapper(NoticeRepository.class).selectAll();
+    public List<Notice> selectAll(int offset) {
+        return sqlSession.getMapper(NoticeRepository.class).selectAll(offset);
     }
 
     @Override
@@ -28,5 +29,20 @@ public class NoticeServiceImpl implements NoticeService {
     @Override
     public Notice selectOne(int noticeno) {
         return sqlSession.getMapper(NoticeRepository.class).selectOne(noticeno);
+    }
+
+    @Override
+    public int count() {
+        return sqlSession.getMapper(NoticeRepository.class).count();
+    }
+
+    @Override
+    public List<Notice> findByKeyword(Search search) {
+        return sqlSession.getMapper(NoticeRepository.class).findByKeyword(search);
+    }
+
+    @Override
+    public int findByKeywordCount(Search search) {
+        return sqlSession.getMapper(NoticeRepository.class).findByKeywordCount(search);
     }
 }

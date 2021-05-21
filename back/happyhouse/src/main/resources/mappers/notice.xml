@@ -3,18 +3,49 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ssafy.happyhouse.model.repository.NoticeRepository">
     <insert id="insert" parameterType="notice">
-        insert into notice(userid, subject, content, regtime)
-        values (#{userid}, #{subject}, #{content}, now())
+        insert into notice(userid, title, content, regtime)
+        values (#{userid}, #{title}, #{content}, now())
     </insert>
 
-    <select id="selectAll" resultType="notice">
-        select * from notice
+    <select id="selectAll" parameterType="int" resultType="notice">
+        select  *
+        from    notice
+        limit   10
+        offset  #{offset}
     </select>
-
 
     <select id="selectOne" parameterType="int" resultType="notice">
         select  *
         from    notice
         where   noticeno=#{noticeno}
+    </select>
+
+    <select id="count" resultType="int">
+        select  count(*)
+        from    notice
+    </select>
+
+    <select id="findByKeyword" parameterType="search" resultType="notice">
+        select  *
+        from    notice
+        <if test="title == null || title == ''">
+            where content like concat('%', #{content}, '%')
+        </if>
+        <if test="content == null || content == ''">
+            where title like concat('%', #{title}, '%')
+        </if>
+        limit   10
+        offset  #{offset}
+    </select>
+
+    <select id="findByKeywordCount" parameterType="search" resultType="int">
+        select  count(*)
+        from    notice
+        <if test="title == null || title == ''">
+            where content like concat('%', #{content}, '%')
+        </if>
+        <if test="content == null || content == ''">
+            where title like concat('%', #{title}, '%')
+        </if>
     </select>
 </mapper>

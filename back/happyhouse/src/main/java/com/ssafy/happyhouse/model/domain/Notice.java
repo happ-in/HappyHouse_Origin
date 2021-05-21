@@ -8,7 +8,7 @@ import java.time.LocalDate;
 public class Notice {
     private int noticeno;
     private String userid;
-    private String subject;
+    private String title;
     private String content;
     private LocalDate regtime;
 }
