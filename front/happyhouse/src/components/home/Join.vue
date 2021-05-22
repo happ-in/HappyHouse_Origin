@@ -16,13 +16,7 @@
             </div>
             <v-text-field type="password" label="Password" v-model="pw" hide-details="auto" ref="pw"></v-text-field>
             <v-text-field label="Username" v-model="username" hide-details="auto" ref="username"></v-text-field>
-            <v-text-field
-              label="E-mail"
-              v-model="email"
-              :rules="emailRule"
-              hide-details="auto"
-              ref="email"
-            ></v-text-field>
+            <v-text-field label="E-mail" v-model="email" hide-details="auto" ref="email"></v-text-field>
             <v-text-field label="Address" v-model="address" hide-details="auto" ref="address"></v-text-field>
             <v-select v-model="role" :items="items" item-text="state" item-value="attr"></v-select>
           </v-container>
@@ -53,8 +47,6 @@ export default {
       address: "",
       role: "USER",
       idcheck: false,
-      success: false,
-      fail: false,
       items: [
         { state: "일반 사용자", attr: "USER" },
         { state: "관리자", attr: "ADMIN" },
