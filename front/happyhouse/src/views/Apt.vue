@@ -1,25 +1,42 @@
 <template>
-  <v-row>
-    <v-col cols="12" sm="3">
-      <v-card> <apt-list> </apt-list> </v-card>
-    </v-col>
-
-    <v-col cols="12" sm="9">
-      <v-card> <draw-map> </draw-map> </v-card>
-    </v-col>
-  </v-row>
+  <div>
+    <div id="header">
+      <apt-header></apt-header>
+    </div>
+    <div id="nav">
+      <apt-list></apt-list>
+    </div>
+    <div id="section">
+      <draw-map></draw-map>
+    </div>
+  </div>
 </template>
 
 <script>
+import AptHeader from "@/components/apt/AptHeader.vue";
 import AptList from "@/components/apt/AptList.vue";
 import DrawMap from "@/components/apt/DrawMap.vue";
 
 export default {
   components: {
+    AptHeader,
     AptList,
     DrawMap,
   },
 };
 </script>
 
-<style></style>
+<style scoped>
+#header {
+  height: 80px;
+}
+
+#nav {
+  color: white;
+  width: 300px;
+  float: left;
+}
+#section {
+  margin-left: 180px;
+}
+</style>

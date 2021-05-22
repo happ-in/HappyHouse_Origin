@@ -29,7 +29,7 @@ export default {
       this.getDongList(areaname);
     },
 
-    displayArea(area, map, customOverlay, infowindow) {
+    displayArea(area, map, customOverlay, customOverlay2) {
       // 다각형을 생성합니다
       var polygon = new kakao.maps.Polygon({
         map: map, // 다각형을 표시할 지도 객체
@@ -66,22 +66,18 @@ export default {
       // 다각형에 click 이벤트를 등록하고 이벤트가 발생하면 다각형의 이름과 면적을 인포윈도우에 표시합니다
       kakao.maps.event.addListener(polygon, "click", (mouseEvent) => {
         var content =
-          "<v-card>" +
-          '<div class="info">' +
-          '   <div class="title">' +
+          '<div class="customoverlay">' +
+          "  <a >" +
+          '    <span class="title">' +
           area.name +
-          "</div>" +
-          '   <div class="size">총 면적 : 약 ' +
-          Math.floor(polygon.getArea()) +
-          " m<sup>2</sup></area>" +
-          "</div>" +
-          "</v-card>";
+          "</span>" +
+          "  </a>" +
+          "</div>";
 
         this.sendKeyword(area.name);
-
-        infowindow.setContent(content);
-        infowindow.setPosition(mouseEvent.latLng);
-        infowindow.setMap(map);
+        customOverlay2.setContent(content);
+        customOverlay2.setPosition(mouseEvent.latLng);
+        customOverlay2.setMap(map);
       });
     },
 
@@ -3734,10 +3730,10 @@ export default {
 
       var map = new kakao.maps.Map(mapContainer, mapOption),
         customOverlay = new kakao.maps.CustomOverlay({}),
-        infowindow = new kakao.maps.InfoWindow({ removable: true });
+        customOverlay2 = new kakao.maps.CustomOverlay({});
 
       for (var i = 0, len = areas.length; i < len; i++) {
-        this.displayArea(areas[i], map, customOverlay, infowindow);
+        this.displayArea(areas[i], map, customOverlay, customOverlay2);
       }
     },
   },
@@ -3759,11 +3755,48 @@ export default {
   padding: 2px;
 }
 
-.info {
-  font-size: 12px;
-  padding: 5px;
+.customoverlay {
+  position: relative;
+  bottom: 30px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  border-bottom: 2px solid #ddd;
+  float: left;
 }
-.info .title {
+.customoverlay:nth-of-type(n) {
+  border: 0;
+  box-shadow: 0px 1px 2px #888;
+}
+.customoverlay a {
+  display: block;
+  text-decoration: none;
+  color: #000;
+  text-align: center;
+  border-radius: 6px;
+  font-size: 14px;
   font-weight: bold;
+  overflow: hidden;
+  background: #d95050;
+  background: #d95050 url(https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/arrow_white.png)
+    no-repeat right 14px center;
+}
+.customoverlay .title {
+  display: block;
+  text-align: center;
+  background: #fff;
+  margin-right: 35px;
+  padding: 10px 15px;
+  font-size: 14px;
+  font-weight: bold;
+}
+.customoverlay:after {
+  content: "";
+  position: absolute;
+  margin-left: -12px;
+  left: 50%;
+  bottom: -12px;
+  width: 22px;
+  height: 12px;
+  background: url("https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/vertex_white.png");
 }
 </style>
