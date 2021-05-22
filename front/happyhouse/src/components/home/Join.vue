@@ -10,17 +10,20 @@
           <v-card-title class="headline lighten-2"> 회원가입 </v-card-title>
 
           <v-container>
-            <v-text-field label="ID" v-model="id" hide-details="auto"></v-text-field>
-            <v-text-field label="Password" v-model="pw"></v-text-field>
-            <v-text-field label="E-mail" v-model="email"></v-text-field>
-            <v-text-field label="Password" v-model="pw"></v-text-field>
+            <div class="d-flex">
+              <v-text-field label="ID" v-model="id" hide-details="auto" ref="id"></v-text-field>
+              <v-btn outlined @click="checkID">Check</v-btn>
+            </div>
+            <v-text-field type="password" label="Password" v-model="pw" hide-details="auto" ref="pw"></v-text-field>
+            <v-text-field label="Username" v-model="username" hide-details="auto" ref="username"></v-text-field>
+            <v-text-field label="E-mail" v-model="email" hide-details="auto" ref="email"></v-text-field>
+            <v-text-field label="Address" v-model="address" hide-details="auto" ref="address"></v-text-field>
+            <v-select v-model="role" :items="items" item-text="state" item-value="attr"></v-select>
           </v-container>
-
-          <v-divider></v-divider>
 
           <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn color="primary" text @click="dialog = false"> Cancel </v-btn>
+            <v-btn color="primary" text @click="closeDialog"> Cancel </v-btn>
             <v-btn color="primary" text @click="join"> Join </v-btn>
           </v-card-actions>
         </v-card>
@@ -30,7 +33,9 @@
 </template>
 
 <script>
-// import axios from "axios";
+import axios from "axios";
+let baseURL = "http://localhost:8888/happyhouse/";
+
 export default {
   data() {
     return {
@@ -38,14 +43,91 @@ export default {
       id: "",
       pw: "",
       email: "",
+      username: "",
+      address: "",
+      role: "USER",
+      idcheck: false,
+      items: [
+        { state: "일반 사용자", attr: "USER" },
+        { state: "관리자", attr: "ADMIN" },
+      ],
     };
   },
   methods: {
-    join() {
-      console.log("join");
-    },
     moveHome() {
       this.$router.go(this.$router.currentRoute);
+    },
+    join() {
+      if (!this.id) {
+        alert("아이디를 작성하세요!");
+        this.$refs.id.focus();
+      } else if (!this.pw) {
+        alert("비밀번호를 작성하세요!");
+        this.$refs.pw.focus();
+      } else if (!this.email) {
+        alert("이메일를 작성하세요!");
+        this.$refs.email.focus();
+      } else if (!this.username) {
+        alert("유저명을 작성하세요!");
+        this.$refs.username.focus();
+      } else if (!this.address) {
+        alert("주소를 작성하세요!");
+        this.$refs.address.focus();
+      } else if (!this.idcheck) {
+        alert("아이디 중복 체크를 하세요!");
+        this.$refs.id.focus();
+      } else {
+        axios
+          .post(baseURL + "join", {
+            userid: this.id,
+            userpwd: this.pw,
+            username: this.username,
+            email: this.email,
+            address: this.address,
+            role: this.role,
+          })
+          .then(() => {
+            alert("회원가입이 완료됐습니다!");
+            this.closeDialog();
+          })
+          .catch(() => {
+            alert("에러발생!");
+          });
+      }
+    },
+    checkID() {
+      if (this.id) {
+        axios
+          .get(baseURL + "validate", {
+            params: {
+              id: this.id,
+            },
+          })
+          .then(() => {
+            alert("사용 가능한 ID입니다.");
+            this.idcheck = true;
+          })
+          .catch(() => {
+            alert("이미 존재하는 ID입니다.");
+          });
+      } else {
+        alert("아이디를 입력하세요!");
+      }
+    },
+    closeDialog() {
+      this.dialog = false;
+      this.id = "";
+      this.pw = "";
+      this.email = "";
+      this.role = "USER";
+      this.username = "";
+      this.address = "";
+      this.idcheck = false;
+    },
+  },
+  watch: {
+    id: function () {
+      this.idcheck = false;
     },
   },
 };

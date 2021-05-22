@@ -10,7 +10,13 @@
     </select>
 
     <insert id="join" parameterType="user">
-        insert into user(userid, username, userpwd, email, address, joindate)
-        values(#{userid}, #{username}, #{userpwd}, #{email}, #{address}, now())
+        insert into user(userid, username, userpwd, email, address, joindate, role)
+        values(#{userid}, #{username}, #{userpwd}, #{email}, #{address}, now(), #{role})
     </insert>
+
+    <select id="findById" parameterType="string" resultType="user">
+        select  *
+        from    user
+        where   userid=#{userid}
+    </select>
 </mapper>

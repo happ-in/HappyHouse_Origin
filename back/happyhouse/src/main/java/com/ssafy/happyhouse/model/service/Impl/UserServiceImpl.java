@@ -20,6 +20,11 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean join(User user) {
-        return false;
+        return sqlSession.getMapper(UserRepository.class).join(user) == 1;
+    }
+
+    @Override
+    public boolean findById(String userid) {
+        return sqlSession.getMapper(UserRepository.class).findById(userid).size() == 0;
     }
 }

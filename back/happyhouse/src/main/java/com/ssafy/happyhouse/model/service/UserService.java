@@ -6,4 +6,6 @@ public interface UserService {
     User findByIdAndPassword(User user);
 
     boolean join(User user);
+
+    boolean findById(String userid);
 }

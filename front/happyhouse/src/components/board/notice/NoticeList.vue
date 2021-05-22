@@ -112,7 +112,7 @@ export default {
       }
     },
     moveCreate() {
-      if (JSON.parse(localStorage.getItem("user")).userid === "ssafy") {
+      if (JSON.parse(localStorage.getItem("user")).role === "ADMIN") {
         this.$router.push("/notice/create");
       } else {
         alert("관리자만 이용 가능합니다!");

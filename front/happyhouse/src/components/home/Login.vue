@@ -11,14 +11,14 @@
 
           <v-container>
             <v-text-field label="ID" v-model="id" hide-details="auto"></v-text-field>
-            <v-text-field label="Password" v-model="pw"></v-text-field>
+            <v-text-field type="password" label="Password" v-model="pw"></v-text-field>
           </v-container>
 
           <v-divider></v-divider>
 
           <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn color="primary" text @click="dialog = false"> Cancel </v-btn>
+            <v-btn color="primary" text @click="cancel"> Cancel </v-btn>
             <v-btn color="primary" text @click="loginCheck"> Login </v-btn>
           </v-card-actions>
         </v-card>
@@ -59,6 +59,11 @@ export default {
     },
     moveHome() {
       this.$router.go(this.$router.currentRoute);
+    },
+    cancel() {
+      this.dialog = false;
+      this.id = "";
+      this.pw = "";
     },
   },
 };
