@@ -16,7 +16,13 @@
             </div>
             <v-text-field type="password" label="Password" v-model="pw" hide-details="auto" ref="pw"></v-text-field>
             <v-text-field label="Username" v-model="username" hide-details="auto" ref="username"></v-text-field>
-            <v-text-field label="E-mail" v-model="email" hide-details="auto" ref="email"></v-text-field>
+            <v-text-field
+              label="E-mail"
+              v-model="email"
+              :rules="emailRule"
+              hide-details="auto"
+              ref="email"
+            ></v-text-field>
             <v-text-field label="Address" v-model="address" hide-details="auto" ref="address"></v-text-field>
             <v-select v-model="role" :items="items" item-text="state" item-value="attr"></v-select>
           </v-container>
@@ -47,6 +53,8 @@ export default {
       address: "",
       role: "USER",
       idcheck: false,
+      success: false,
+      fail: false,
       items: [
         { state: "일반 사용자", attr: "USER" },
         { state: "관리자", attr: "ADMIN" },
@@ -58,6 +66,7 @@ export default {
       this.$router.go(this.$router.currentRoute);
     },
     join() {
+      console.log(this.emailRule);
       if (!this.id) {
         alert("아이디를 작성하세요!");
         this.$refs.id.focus();
@@ -91,7 +100,7 @@ export default {
             this.closeDialog();
           })
           .catch(() => {
-            alert("에러발생!");
+            alert("회원가입 실패!");
           });
       }
     },
@@ -108,7 +117,7 @@ export default {
             this.idcheck = true;
           })
           .catch(() => {
-            alert("이미 존재하는 ID입니다.");
+            alert("이미 사용 중인 ID입니다.");
           });
       } else {
         alert("아이디를 입력하세요!");
@@ -123,6 +132,8 @@ export default {
       this.username = "";
       this.address = "";
       this.idcheck = false;
+      this.success = false;
+      this.fail = false;
     },
   },
   watch: {
