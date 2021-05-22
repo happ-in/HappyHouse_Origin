@@ -29,14 +29,13 @@ export default {
 <style scoped>
 #header {
   height: 80px;
+  border: 1px solid rgba(172, 172, 172, 0.714);
 }
 
 #nav {
   color: white;
   width: 300px;
+  border: 1px solid rgba(172, 172, 172, 0.714);
   float: left;
-}
-#section {
-  margin-left: 180px;
 }
 </style>
