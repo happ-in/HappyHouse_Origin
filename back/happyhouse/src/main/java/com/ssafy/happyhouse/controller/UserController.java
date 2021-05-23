@@ -1,6 +1,7 @@
 package com.ssafy.happyhouse.controller;
 
 import com.ssafy.happyhouse.model.domain.User;
+import com.ssafy.happyhouse.model.domain.UserImage;
 import com.ssafy.happyhouse.model.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

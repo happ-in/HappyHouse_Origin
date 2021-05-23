@@ -1,6 +1,7 @@
 package com.ssafy.happyhouse.model.domain;
 
 import lombok.Data;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDate;
 
@@ -13,4 +14,6 @@ public class User {
     private String address;
     private LocalDate joindate;
     private String role;
+    private String img;
+    private String path;
 }

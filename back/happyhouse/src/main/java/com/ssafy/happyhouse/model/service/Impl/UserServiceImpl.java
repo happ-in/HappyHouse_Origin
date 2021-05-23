@@ -1,6 +1,7 @@
 package com.ssafy.happyhouse.model.service.Impl;
 
 import com.ssafy.happyhouse.model.domain.User;
+import com.ssafy.happyhouse.model.domain.UserImage;
 import com.ssafy.happyhouse.model.repository.UserRepository;
 import com.ssafy.happyhouse.model.service.UserService;
 import org.apache.ibatis.session.SqlSession;

@@ -1,6 +1,7 @@
 package com.ssafy.happyhouse.model.repository;
 
 import com.ssafy.happyhouse.model.domain.User;
+import com.ssafy.happyhouse.model.domain.UserImage;
 
 import java.util.List;
 
