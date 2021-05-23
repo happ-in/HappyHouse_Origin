@@ -2,21 +2,21 @@
   <v-container>
     <br />
     <v-img class="fileupload" :src="image" alt="" srcset="" @click="fileUploadTag" />
-
     <v-file-input
       hide-input
       truncate-length="15"
       accept="image/*"
       ref="image"
       prepend-icon
-      @change="saveImg"
+      @change="selectFile"
+      name="image"
     ></v-file-input>
 
     <br />
 
     <v-row class="d-flex">
       <v-col><hr /></v-col>
-      <v-col class="text-center">
+      <v-col class="text-center text-font">
         <h2>{{ username }}님 환영합니다!</h2>
       </v-col>
       <v-col><hr /></v-col>
@@ -24,7 +24,7 @@
 
     <br />
 
-    <div class="text-center">
+    <div class="text-center text-font">
       <router-link to="/">회원정보수정</router-link> <br />
       <router-link to="/">회원탈퇴</router-link>
     </div>
@@ -33,6 +33,7 @@
 </template>
 
 <script>
+import axios from "axios";
 export default {
   data() {
     return {
@@ -42,24 +43,84 @@ export default {
   },
   created() {
     this.username = JSON.parse(localStorage.getItem("user")).username;
-    this.image = require("@/assets/person.png");
+    axios
+      .get("http://localhost:8888/happyhouse/file", {
+        params: {
+          userid: JSON.parse(localStorage.getItem("user")).userid,
+        },
+      })
+      .then(({ data }) => {
+        console.log(data);
+        this.image = require(data);
+      })
+      .catch((error) => {
+        console.log(error);
+        this.image = require("@/assets/person.png");
+      });
   },
   methods: {
     fileUploadTag() {
       this.$refs.image.$refs.input.click();
     },
     saveImg() {
-      console.log("save image");
+      console.log(this.filename);
+      this.saveBtn = false;
+    },
+    selectFile(file) {
+      if (file) console.log(file);
+      let image = new FormData();
+      image.append("title", this.name);
+      image.append("file", file);
+
+      axios
+        .post("http://localhost:8888/happyhouse/file", image, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+          params: {
+            userid: JSON.parse(localStorage.getItem("user")).userid,
+          },
+        })
+        .then(() => {
+          console.log("success");
+        })
+        .catch(() => {
+          console.log("fail");
+        });
     },
   },
 };
 </script>
 
 <style>
+@font-face {
+  font-family: "Bazzi";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/Bazzi.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+.text-font {
+  font-family: Bazzi;
+}
 .fileupload {
   width: 150px;
   height: 150px;
   margin: auto;
   border-radius: 50%;
+}
+a {
+  text-decoration: none;
+}
+a:link {
+  color: black;
+}
+a:visited {
+  color: black;
+}
+a:hover {
+  color: black;
+}
+a:active {
+  color: black;
 }
 </style>
