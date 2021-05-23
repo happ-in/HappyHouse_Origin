@@ -51,7 +51,7 @@ export default {
       })
       .then(({ data }) => {
         console.log(data);
-        this.image = require(`C:/happyhouse/${data.folder}/${data.filename}`);
+        this.image = require(`@/assets/${data.folder}/${data.filename}`);
       })
       .catch((error) => {
         console.log(error);
@@ -95,7 +95,8 @@ export default {
 <style>
 @font-face {
   font-family: "Bazzi";
-  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/Bazzi.woff") format("woff");
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/Bazzi.woff")
+    format("woff");
   font-weight: normal;
   font-style: normal;
 }

@@ -30,13 +30,13 @@ public class FileController {
     public ResponseEntity<String> UserImage(MultipartFile file, HttpServletRequest request) {
         String userid = request.getParameter("userid");
         String today = new SimpleDateFormat("yyMMdd").format(new Date());
-        String saveFolder = "C:\\happyhouse\\" + today;
+        String saveFolder = "../../front/happyhouse/src/assets/" + today;
         File folder = new File(saveFolder);
         if(!folder.exists()) folder.mkdirs();
         String origin = file.getOriginalFilename();
         String saveFileName = UUID.randomUUID().toString() + origin.substring(origin.lastIndexOf('.')).toLowerCase();
         try {
-            file.transferTo(new File(folder, saveFileName));
+            file.transferTo(new File(folder.getCanonicalPath(), saveFileName));
             FileInfo image = new FileInfo();
             image.setUserid(userid);
             image.setFilename(saveFileName);

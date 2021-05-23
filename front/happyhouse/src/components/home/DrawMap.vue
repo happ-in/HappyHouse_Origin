@@ -3757,7 +3757,7 @@ export default {
 
 .customoverlay {
   position: relative;
-  bottom: 30px;
+  bottom: 55px;
   border-radius: 6px;
   border: 1px solid #ccc;
   border-bottom: 2px solid #ddd;

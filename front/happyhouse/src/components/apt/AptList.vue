@@ -1,7 +1,7 @@
 <template>
-  <div class="apt_list">
+  <div class="apt_list overflow-y-auto mx-auto">
     <template>
-      <v-expansion-panels focusable>
+      <v-expansion-panels popout>
         <v-expansion-panel v-for="(item, i) in aptDealList.data" :key="i">
           <v-expansion-panel-header>{{ item.aptName }}</v-expansion-panel-header>
           <v-expansion-panel-content>
@@ -24,6 +24,7 @@ export default {
   data() {
     return {};
   },
+  mounted() {},
   methods: {},
 
   created() {},
@@ -38,6 +39,10 @@ export default {
 
   font-weight: normal;
   font-style: normal;
+}
+
+.apt_list {
+  height: 1000px;
 }
 
 .header_title {
