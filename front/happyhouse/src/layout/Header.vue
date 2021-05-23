@@ -63,6 +63,7 @@ export default {
       } else {
         alert("로그인 후 이용 가능합니다!");
         if (this.$route.path !== "/") this.$router.push("/");
+
         setTimeout(() => {
           this.active_tab = 0;
         }, 100);
@@ -83,8 +84,8 @@ export default {
 }
 
 @font-face {
-  font-family: "this_is_font_name";
-  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_tway@1.0/twayair.woff")
+  font-family: "tway_sky";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts-20-12@1.0/SDSamliphopangche_Outline.woff")
     format("woff");
 
   font-weight: normal;
@@ -93,7 +94,7 @@ export default {
 
 .header_title {
   text-align: center;
-  font-family: this_is_font_name;
+  font-family: tway_sky;
 }
 
 /* 상단 고정 */

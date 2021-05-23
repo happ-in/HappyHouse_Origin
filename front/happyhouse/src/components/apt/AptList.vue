@@ -6,9 +6,23 @@
           <v-expansion-panel-header>{{ item.aptName }}</v-expansion-panel-header>
 
           <v-expansion-panel-content>
-            <v-divider class="mx-4"></v-divider>
-            거래금액: {{ item.dealAmount }}만원<br />
-            면적: {{ item.area }}
+            <v-divider class="mx-4 mb-4"></v-divider>
+            <v-row>
+              <v-col>
+                <div class="aptAttr">거래금액:<br /></div>
+                <div class="aptVal">{{ item.dealAmount }}만원</div>
+              </v-col>
+              <v-divider class="mt-2 mb-2" vertical></v-divider>
+              <v-col>
+                <div class="aptAttr">면적: <br /></div>
+                <div class="aptVal">{{ item.area }}m<sup>2</sup></div>
+              </v-col>
+              <v-divider class="mt-2 mb-2" vertical></v-divider>
+              <v-col>
+                <div class="aptAttr">건축년도 : <br /></div>
+                <div class="aptVal">{{ item.buildYear }}년</div>
+              </v-col>
+            </v-row>
           </v-expansion-panel-content>
         </v-expansion-panel>
       </v-expansion-panels>
@@ -41,6 +55,18 @@ export default {
 
   font-weight: normal;
   font-style: normal;
+}
+
+.aptAttr {
+  color: #bdbdbd;
+  font-weight: 800;
+  font-size: 12px;
+}
+
+.aptVal {
+  font-size: 15pt;
+  font-weight: bold;
+  color: #3f51b5;
 }
 
 .apt_list {

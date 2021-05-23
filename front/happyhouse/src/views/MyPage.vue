@@ -1,7 +1,7 @@
 <template>
-  <div style="max-width: 1200px">
+  <v-container style="max-width: 1200px">
     <my-info></my-info>
-  </div>
+  </v-container>
 </template>
 
 <script>

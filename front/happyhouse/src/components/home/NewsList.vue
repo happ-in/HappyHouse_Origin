@@ -56,7 +56,7 @@ export default {
 <style scoped>
 @font-face {
   font-family: "this_is_font_name";
-  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_tway@1.0/twaysky.woff")
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_twelve@1.1/Cafe24Simplehae.woff")
     format("woff");
 
   font-weight: normal;

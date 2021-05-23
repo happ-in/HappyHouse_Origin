@@ -1,7 +1,5 @@
 <template>
-  <div id="app">
-    <div id="map" @click="sendKeyword"></div>
-  </div>
+  <div id="map" @click="sendKeyword"></div>
 </template>
 
 <script>
