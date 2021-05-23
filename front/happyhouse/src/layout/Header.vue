@@ -13,10 +13,10 @@
         <div class="header_title">행복한 우리집</div>
       </v-img>
 
-      <v-tabs fixed-tabs background-color="indigo" dark>
-        <v-tab @click="$router.push('/')"> 홈 </v-tab>
-        <v-tab @click="$router.push('/notice')"> 공지사항 </v-tab>
-        <v-tab @click="$router.push('/qna')"> Q & A </v-tab>
+      <v-tabs fixed-tabs background-color="indigo" dark v-model="active_tab">
+        <v-tab @click="moveToHome"> 홈 </v-tab>
+        <v-tab @click="moveToNotice"> 공지사항 </v-tab>
+        <v-tab @click="moveToQna"> Q & A </v-tab>
         <v-tab @click="checkLogin"> 마이 페이지 </v-tab>
       </v-tabs>
     </v-card>
@@ -27,16 +27,45 @@
 export default {
   data() {
     return {
+      active_tab: 0,
       items: ["Home", "Notice", "Q&A", "My Page"],
     };
   },
+  created() {
+    // refresh 시 현재 탭 유지
+    setTimeout(() => {
+      if (this.$route.path === "/") {
+        this.active_tab = 0;
+      } else if (this.$route.path === "/notice") {
+        this.active_tab = 1;
+      } else if (this.$route.path === "/qna") {
+        this.active_tab = 2;
+      } else if (this.$route.path === "/mypage") {
+        this.active_tab = 3;
+      }
+    }, 100);
+  },
   methods: {
+    moveToHome() {
+      if (this.$route.path !== "/") this.$router.push("/");
+    },
+    moveToNotice() {
+      if (this.$route.path !== "/notice") this.$router.push("/notice");
+    },
+
+    moveToQna() {
+      if (this.$route.path !== "/qna") this.$router.push("/qna");
+    },
+
     checkLogin() {
       if (localStorage.getItem("user")) {
-        this.$router.push("/mypage");
+        if (this.$route.path !== "/mypage") this.$router.push("/mypage");
       } else {
         alert("로그인 후 이용 가능합니다!");
-        this.$router.push("/");
+        if (this.$route.path !== "/") this.$router.push("/");
+        setTimeout(() => {
+          this.active_tab = 0;
+        }, 100);
       }
     },
   },
@@ -55,7 +84,8 @@ export default {
 
 @font-face {
   font-family: "this_is_font_name";
-  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_tway@1.0/twayair.woff") format("woff");
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_tway@1.0/twayair.woff")
+    format("woff");
 
   font-weight: normal;
   font-style: normal;

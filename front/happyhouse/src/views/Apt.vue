@@ -34,7 +34,7 @@ export default {
 
 #nav {
   color: white;
-  width: 300px;
+  width: 320px;
   border: 1px solid rgba(172, 172, 172, 0.714);
   float: left;
 }

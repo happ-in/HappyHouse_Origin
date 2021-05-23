@@ -1,8 +1,8 @@
 <template>
-  <div>
+  <v-container style="max-width: 1200px">
     <h1 class="text-center">QnA</h1>
     <router-view></router-view>
-  </div>
+  </v-container>
 </template>
 
 <script>

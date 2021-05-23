@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div style="max-width: 1200px">
     <my-info></my-info>
   </div>
 </template>

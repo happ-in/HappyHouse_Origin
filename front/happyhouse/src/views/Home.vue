@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-container>
+    <v-container style="max-width: 1200px">
       <v-row>
         <v-col cols="12" sm="8">
           <v-card> <draw-map> </draw-map> </v-card>

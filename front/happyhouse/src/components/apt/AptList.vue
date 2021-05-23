@@ -4,7 +4,9 @@
       <v-expansion-panels popout>
         <v-expansion-panel v-for="(item, i) in aptDealList.data" :key="i">
           <v-expansion-panel-header>{{ item.aptName }}</v-expansion-panel-header>
+
           <v-expansion-panel-content>
+            <v-divider class="mx-4"></v-divider>
             거래금액: {{ item.dealAmount }}만원<br />
             면적: {{ item.area }}
           </v-expansion-panel-content>
