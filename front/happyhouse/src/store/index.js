@@ -1,22 +1,64 @@
 import Vue from "vue";
 import Vuex from "vuex";
+import axios from "axios";
+import createPersistedState from 'vuex-persistedstate';
+
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
+  plugins: [
+    createPersistedState(),
+  ],
+  modules: {},
   state: {
     gu: Object,
-    dongs: [],
+    dong: Object,
+    dongs: [], // 구에 해당하는 동 목록
+    aptDealList: [],
   },
   mutations: {
+    GET_APT_DEAL_LIST(state, list) {
+      state.aptDealList = list;
+    },
     GET_DONG_LIST(state, dongs) {
       state.dongs = dongs;
     },
     SELECT_GU(state, gu) {
       state.gu = gu;
     },
+    SELECT_DONG(state, dong) {
+      state.dong = dong;
+    },
   },
   actions: {
+    getAptDealList({ commit }, dong) {
+      const SERVICE_URL =
+      'http://localhost:8888/happyhouse/apt';
+
+    const params = {
+      dong: dong,
+    };
+      
+    axios
+    .get(SERVICE_URL, {
+      params,
+    })
+      .then((response) => {
+     commit('GET_APT_DEAL_LIST',response);
+    })
+    .catch((error) => {
+      console.dir(error);
+    });
+    },
+
+    selectDong({ commit }, dong) {
+      commit("SELECT_DONG", dong);
+    },
+
+    selectGu({ commit }, gu) {
+      commit("SELECT_GU", gu);
+    },
     getDongList({ commit }, gu) {
       var gudong = [
         {
@@ -571,10 +613,6 @@ export default new Vuex.Store({
         }
       }
     },
-
-    selectGu({ commit }, gu) {
-      commit("SELECT_GU", gu);
-    },
   },
-  modules: {},
+  
 });

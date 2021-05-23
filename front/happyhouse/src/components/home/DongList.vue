@@ -4,8 +4,8 @@
 
     <v-card class="overflow-y-auto mx-auto" max-height="450" tile>
       <v-list flat>
-        <v-list-item-group v-model="selectedItem">
-          <v-list-item v-for="(item, i) in dongs" :key="i" @click="change">
+        <v-list-item-group>
+          <v-list-item v-for="(item, i) in dongs" :key="i" @click="change(i)">
             <v-list-item-content>
               <v-list-item-title v-text="item"></v-list-item-title>
             </v-list-item-content>
@@ -18,19 +18,20 @@
 
 <script>
 import { mapState } from "vuex";
+import { mapActions } from "vuex";
 
 export default {
   name: "DongList",
   computed: {
     ...mapState(["dongs"]),
   },
-  data: () => ({
-    selectedItem: 1,
-    items: [],
-  }),
+  data: () => ({}),
 
   methods: {
-    change() {
+    ...mapActions(["getAptDealList", "selectDong"]),
+    change(index) {
+      this.getAptDealList(this.dongs[index]);
+      this.selectDong(this.dongs[index]);
       this.$router.push("/apt");
     },
   },

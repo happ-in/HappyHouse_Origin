@@ -2,12 +2,11 @@
   <div class="apt_list">
     <template>
       <v-expansion-panels focusable>
-        <v-expansion-panel v-for="(item, i) in 5" :key="i">
-          <v-expansion-panel-header>Item</v-expansion-panel-header>
+        <v-expansion-panel v-for="(item, i) in aptDealList.data" :key="i">
+          <v-expansion-panel-header>{{ item.aptName }}</v-expansion-panel-header>
           <v-expansion-panel-content>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-            incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-            exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+            거래금액: {{ item.dealAmount }}만원<br />
+            면적: {{ item.area }}
           </v-expansion-panel-content>
         </v-expansion-panel>
       </v-expansion-panels>
@@ -16,35 +15,18 @@
 </template>
 
 <script>
-import axios from "axios";
+import { mapState } from "vuex";
 
 export default {
+  computed: {
+    ...mapState(["aptDealList"]),
+  },
   data() {
-    return {
-      newsList: [],
-    };
+    return {};
   },
-  methods: {
-    test(num) {
-      var url = this.newsList.items[num].link;
-      window.open(url);
-    },
-  },
+  methods: {},
 
-  created() {
-    axios
-      .get("http://localhost:8888/happyhouse/news", {
-        params: {
-          query: "부동산",
-        },
-      })
-      .then(({ data }) => {
-        this.newsList = data;
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  },
+  created() {},
 };
 </script>
 
