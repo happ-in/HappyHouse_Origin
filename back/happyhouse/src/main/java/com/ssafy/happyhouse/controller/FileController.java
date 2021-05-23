@@ -30,7 +30,7 @@ public class FileController {
     public ResponseEntity<String> UserImage(MultipartFile file, HttpServletRequest request) {
         String userid = request.getParameter("userid");
         String today = new SimpleDateFormat("yyMMdd").format(new Date());
-        String saveFolder = "C:/" + today;
+        String saveFolder = "C:\\happyhouse\\" + today;
         File folder = new File(saveFolder);
         if(!folder.exists()) folder.mkdirs();
         String origin = file.getOriginalFilename();
@@ -40,7 +40,7 @@ public class FileController {
             FileInfo image = new FileInfo();
             image.setUserid(userid);
             image.setFilename(saveFileName);
-            image.setFolder(saveFolder);
+            image.setFolder(today);
             if (service.findById(userid) == null) {
                 if (service.save(image)) return new ResponseEntity<>(SUCCESS, HttpStatus.OK);
             } else {
@@ -53,12 +53,9 @@ public class FileController {
     }
 
     @GetMapping
-    public ResponseEntity<String> findById(@RequestParam("userid") String userid) {
+    public ResponseEntity<FileInfo> findById(@RequestParam("userid") String userid) {
         FileInfo file = service.findById(userid);
-        if (file == null) return new ResponseEntity<>(FAIL, HttpStatus.INTERNAL_SERVER_ERROR);
-        else {
-            String filePath = file.getFolder() + "/" + file.getFilename();
-            return new ResponseEntity<>(filePath, HttpStatus.OK);
-        }
+        if (file == null) return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        return new ResponseEntity<>(file, HttpStatus.OK);
     }
 }

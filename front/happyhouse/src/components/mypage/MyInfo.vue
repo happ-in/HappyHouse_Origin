@@ -51,7 +51,7 @@ export default {
       })
       .then(({ data }) => {
         console.log(data);
-        this.image = require(data);
+        this.image = require(`C:/happyhouse/${data.folder}/${data.filename}`);
       })
       .catch((error) => {
         console.log(error);
