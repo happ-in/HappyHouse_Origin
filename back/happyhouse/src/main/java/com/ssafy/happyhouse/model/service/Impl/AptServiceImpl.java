@@ -1,6 +1,7 @@
 package com.ssafy.happyhouse.model.service.Impl;
 
 import com.ssafy.happyhouse.model.domain.Apt;
+import com.ssafy.happyhouse.model.domain.AptPrice;
 import com.ssafy.happyhouse.model.repository.AptRepository;
 import com.ssafy.happyhouse.model.service.AptService;
 import org.apache.ibatis.session.SqlSession;
@@ -18,5 +19,10 @@ public class AptServiceImpl implements AptService {
     @Override
     public List<Apt> findByDong(String dong) {
         return sqlSession.getMapper(AptRepository.class).findByDong(dong);
+    }
+
+    @Override
+    public List<Apt> findByDealAmount(AptPrice aptPrice) {
+        return sqlSession.getMapper(AptRepository.class).findByDealAmount(aptPrice);
     }
 }

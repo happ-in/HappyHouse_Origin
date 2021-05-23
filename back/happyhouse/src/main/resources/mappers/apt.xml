@@ -7,4 +7,14 @@
         from    houseinfo i right join housedeal d on i.aptname = d.aptname
         where   i.dong=#{dong}
     </select>
+
+    <select id="findByDealAmount" parameterType="aptprice" resultType="apt">
+        select  i.no, i.dong, i.aptname, i.code, i.jibun, i.lat, i.lng, d.dealamount, d.buildyear, d.dealday, d.area, d.floor
+        from    houseinfo i right join housedeal d on i.aptname = d.aptname
+        <![CDATA[
+        where   i.dong=#{dong}
+                and
+                cast(replace(d.dealAmount, ',', '') as unsigned) >= #{min} and cast(replace(d.dealAmount, ',', '') as unsigned) <= #{max}
+        ]]>
+    </select>
 </mapper>
