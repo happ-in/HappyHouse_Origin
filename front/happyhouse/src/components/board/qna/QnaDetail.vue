@@ -19,9 +19,10 @@
     </v-row>
     <hr />
     <br />
-    <v-row>
+    <v-row class="d-flex">
       <h6 class="ml-3">작성일 : {{ qna.mod_date }}</h6>
       <h6 class="ml-auto mr-3">작성자 : {{ qna.username }}</h6>
+      <img class="userimage" :src="image" />
     </v-row>
 
     <br />
@@ -45,6 +46,7 @@ export default {
     return {
       qna: [],
       userid: "",
+      image: "",
     };
   },
   created() {
@@ -52,6 +54,8 @@ export default {
       .get(`http://localhost:8888/happyhouse/qna/${this.$route.params.no}`)
       .then(({ data }) => {
         this.qna = data;
+        if (data.filename) this.image = require(`@/assets/${data.folder}/${data.filename}`);
+        else this.image = require("@/assets/person.png");
       })
       .catch(() => {
         alert("Error!");
@@ -83,5 +87,10 @@ export default {
 <style>
 .border {
   padding: 5px;
+}
+.userimage {
+  width: 20px;
+  object-fit: cover;
+  margin-right: 10px;
 }
 </style>

@@ -12,4 +12,6 @@ public class Qna {
     private String title;
     private String content;
     private LocalDate mod_date;
+    private String folder;
+    private String filename;
 }

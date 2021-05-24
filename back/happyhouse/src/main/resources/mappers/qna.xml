@@ -11,9 +11,9 @@
     </select>
 
     <select id="selectOne" parameterType="int" resultType="qna">
-        select  *
-        from    qna
-        where   id=#{id}
+        select  q.id, q.title, q.content, q.mod_date, q.username, f.folder, f.filename
+        from    qna q left join fileinfo f on q.userid = f.userid
+        where   q.id=#{id}
     </select>
 
     <insert id="insert" parameterType="qna">
