@@ -37,10 +37,11 @@ export default {
         this.aptDealList.data[this.apt].lat,
         this.aptDealList.data[this.apt].lng
       );
-
+      this.map.setLevel(2);
       // 지도 중심을 부드럽게 이동시킵니다
       // 만약 이동할 거리가 지도 화면보다 크면 부드러운 효과 없이 이동합니다
       this.map.panTo(moveLatLon);
+      // setLevel 시 애니메이션 효과의 지속시간을 500ms로 설정
     },
   },
   methods: {
@@ -57,14 +58,13 @@ export default {
       var mapContainer = document.getElementById("map"), // 지도를 표시할 div
         mapOption = {
           center: cam_pos, // 지도의 중심좌표
-          level: 5, // 지도의 확대 레벨
+          level: 4, // 지도의 확대 레벨
         };
 
       this.map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
 
       // 마커 이미지의 이미지 주소입니다
-      var imageSrc =
-        "https://lh3.googleusercontent.com/proxy/9ASMfOTymihvo6CAsk4I87jgejkaiemo_WdgaoWh7BPRsM-3SuseWVvup59DcsPAfOp1yDNBkyyJzE7SZGbNGK968GaTtuLMVCWwaR30FmdbW8xzt6ibKSQrjc_f55vC7edZdTlDRzTo0hEUaz8TscANedAdBgRfgni08L4v-fnCQgRLKrKQk_N9cC1KQ8vagDsYdZid319CMBWJv4wvjnedeya6-3Fd_vfHdhZTBAMpDyDjTnhkw8L1-72X34rlHRfe6i6ySZi_KTrP20OHZv4wNjrjNw8peB07JYUIj_HPMMWDrH0ni4WXEUqppcNwihuZK31fAA-gMN2dEeTKBq0vVQ";
+      var imageSrc = "http://assets.stickpng.com/images/58889219bc2fc2ef3a1860aa.png";
 
       for (let i = 0; i < this.aptDealList.data.length; i++) {
         // 마커 이미지의 이미지 크기 입니다
@@ -154,8 +154,8 @@ export default {
   font-weight: bold;
   overflow: hidden;
   background: #d95050;
-  background: #d95050 url(https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/arrow_white.png)
-    no-repeat right 14px center;
+  background: #d95050 url(http://assets.stickpng.com/images/58889219bc2fc2ef3a1860aa.png) no-repeat
+    right 14px center;
 }
 .customoverlay .title {
   display: block;
