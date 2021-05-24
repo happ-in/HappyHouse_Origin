@@ -3,7 +3,7 @@
     <div class="text-center">
       <v-dialog v-model="dialog" width="374">
         <template v-slot:activator="{ on, attrs }">
-          <v-btn color="red lighten-2" dark v-bind="attrs" v-on="on"> 로그인 </v-btn>
+          <v-btn outlined rounded v-bind="attrs" v-on="on"> Sign In </v-btn>
         </template>
 
         <v-card>

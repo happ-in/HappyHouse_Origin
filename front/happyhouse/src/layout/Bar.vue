@@ -6,7 +6,7 @@
     </div>
     <template v-else>
       <v-container>
-        <v-btn color="red lighten-2" dark @click="logout"> 로그아웃 </v-btn>
+        <v-btn outlined rounded @click="logout"> Logout </v-btn>
       </v-container>
     </template>
   </v-sheet>
