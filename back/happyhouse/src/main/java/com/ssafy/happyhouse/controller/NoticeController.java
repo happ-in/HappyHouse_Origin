@@ -32,7 +32,7 @@ public class NoticeController {
     @GetMapping("/list/{page}")
     public ResponseEntity<ListDto> selectAll(@PathVariable("page") int page) {
         int offset = (page - 1) * SIZE;
-        return new ResponseEntity<>(new ListDto(service.selectAll(offset), page, (service.count() + SIZE)/SIZE), HttpStatus.OK);
+        return new ResponseEntity<>(new ListDto(service.selectAll(offset), page, (service.count() + SIZE - 1)/SIZE), HttpStatus.OK);
     }
 
     @GetMapping("/{no}")
@@ -47,7 +47,7 @@ public class NoticeController {
         search.setTitle(request.getParameter("title"));
         search.setContent(request.getParameter("content"));
         search.setOffset((page - 1) * SIZE);
-        int length = (service.findByKeywordCount(search) + SIZE)/SIZE;
+        int length = (service.findByKeywordCount(search) + SIZE - 1)/SIZE;
         return  new ResponseEntity<>(new ListDto(service.findByKeyword(search), page, length), HttpStatus.OK);
     }
 
