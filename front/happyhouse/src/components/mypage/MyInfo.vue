@@ -25,6 +25,9 @@
     <br />
 
     <div class="text-center text-font">
+      <template v-if="role === 'ADMIN'">
+        <user-manage></user-manage>
+      </template>
       <user-modify></user-modify>
       <user-delete></user-delete>
     </div>
@@ -36,15 +39,18 @@
 import axios from "axios";
 import UserModify from "@/components/user/UserModify.vue";
 import UserDelete from "@/components/user/UserDelete.vue";
+import UserManage from "@/components/user/UserManage.vue";
 export default {
   components: {
     UserModify,
     UserDelete,
+    UserManage,
   },
   data() {
     UserModify;
     return {
       username: "",
+      role: "",
       image: "",
       active: false,
     };
@@ -52,6 +58,7 @@ export default {
   created() {
     let user = JSON.parse(localStorage.getItem("user"));
     this.username = user.username;
+    this.role = user.role;
     if (user.filename) {
       this.image = require(`@/assets/${user.folder}/${user.filename}`);
     } else {

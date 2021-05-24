@@ -36,4 +36,10 @@
         delete  from user
         where   userid=#{userid}
     </delete>
+
+    <select id="selectAll" resultType="User">
+        select  *
+        from    user
+        where   role='USER'
+    </select>
 </mapper>

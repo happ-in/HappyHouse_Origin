@@ -2,6 +2,8 @@ package com.ssafy.happyhouse.model.service;
 
 import com.ssafy.happyhouse.model.domain.User;
 
+import java.util.List;
+
 public interface UserService {
     User findByIdAndPassword(User user);
 
@@ -14,4 +16,6 @@ public interface UserService {
     boolean update(User user);
 
     boolean delete(String userid);
+
+    List<User> selectAll();
 }

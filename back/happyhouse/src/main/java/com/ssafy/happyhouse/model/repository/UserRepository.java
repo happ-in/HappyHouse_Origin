@@ -16,4 +16,6 @@ public interface UserRepository {
     int update(User user);
 
     int delete(String userid);
+
+    List<User> selectAll();
 }

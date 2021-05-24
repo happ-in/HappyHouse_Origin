@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 
+import java.util.List;
+
 import static com.ssafy.happyhouse.utils.StringUtil.*;
 
 @RestController
@@ -63,5 +65,10 @@ public class UserController {
             return new ResponseEntity<>(SUCCESS, HttpStatus.OK);
         }
         return new ResponseEntity<>(FAIL, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    @GetMapping("/user")
+    public ResponseEntity<List<User>> selectAll() {
+        return new ResponseEntity<>(service.selectAll(), HttpStatus.OK);
     }
 }

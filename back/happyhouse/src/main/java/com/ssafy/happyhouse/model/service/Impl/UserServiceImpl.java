@@ -7,6 +7,8 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class UserServiceImpl implements UserService {
 
@@ -40,5 +42,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public boolean delete(String userid) {
         return sqlSession.getMapper(UserRepository.class).delete(userid) == 1;
+    }
+
+    @Override
+    public List<User> selectAll() {
+        return sqlSession.getMapper(UserRepository.class).selectAll();
     }
 }
