@@ -13,6 +13,8 @@ public class Apt {
     private String lng;
     private String dealAmount;
     private String buildYear;
+    private String dealYear;
+    private String dealMonth;
     private String dealDay;
     private String area;
     private String floor;
