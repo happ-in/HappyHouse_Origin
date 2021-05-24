@@ -14,6 +14,10 @@
             <v-text-field type="password" label="Password" v-model="pw"></v-text-field>
           </v-container>
 
+          <div class="text-center">
+            <a href="#">Forgot Password?</a>
+            <br />
+          </div>
           <v-divider></v-divider>
 
           <v-card-actions>
@@ -68,3 +72,10 @@ export default {
   },
 };
 </script>
+
+<style>
+a {
+  text-decoration: none;
+  color: black;
+}
+</style>

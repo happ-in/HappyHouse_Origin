@@ -1,5 +1,6 @@
 package com.ssafy.happyhouse.model.service.Impl;
 
+import com.ssafy.happyhouse.model.domain.Email;
 import com.ssafy.happyhouse.model.domain.User;
 import com.ssafy.happyhouse.model.repository.UserRepository;
 import com.ssafy.happyhouse.model.service.UserService;
@@ -8,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -35,6 +37,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public User findByIdAndEmail(Email email) {
+        return sqlSession.getMapper(UserRepository.class).findByIdAndEmail(email);
+    }
+
+    @Override
     public boolean update(User user) {
         return sqlSession.getMapper(UserRepository.class).update(user) == 1;
     }
@@ -47,5 +54,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<User> selectAll() {
         return sqlSession.getMapper(UserRepository.class).selectAll();
+    }
+
+    @Override
+    public boolean updatePassword(Map map) {
+        return sqlSession.getMapper(UserRepository.class).updatePassword(map) == 1;
     }
 }

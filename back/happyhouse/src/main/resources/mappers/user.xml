@@ -42,4 +42,16 @@
         from    user
         where   role='USER'
     </select>
+
+    <update id="updatePassword" parameterType="map">
+        update  user
+            set userpwd=#{userpwd}
+        where   userid=#{userid}
+    </update>
+
+    <select id="findByIdAndEmail" parameterType="email" resultType="user">
+        select  *
+        from    user
+        where   userid=#{userid} and email=#{email}
+    </select>
 </mapper>
