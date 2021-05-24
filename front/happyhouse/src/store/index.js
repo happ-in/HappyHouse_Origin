@@ -15,10 +15,16 @@ export default new Vuex.Store({
     gu: Object, // 현재 선택된 구
     dong: Object, // 현재 선택된 동
     apt: Object,
+    searchKeyword: Object, // 검색하려는 키워드
+
     dongs: [], // 구에 해당하는 동 목록
     aptDealList: [], // 동에 해당하는 거래 목록
+    
   },
   mutations: {
+    GET_KEYWORD(state, key) {
+      state.searchKeyword = key;
+    },
     SELECT_APT(state, apt) {
       state.apt = apt;
     },
@@ -36,6 +42,10 @@ export default new Vuex.Store({
     },
   },
   actions: {
+    getKeyword({ commit }, key) {
+      commit("GET_KEYWORD", key);
+    },
+
     selectApt({ commit }, apt) {
       commit("SELECT_APT", apt);
     },

@@ -4,7 +4,7 @@
       <v-img
         class="white--text py-6"
         height="200px"
-        src="https://picsum.photos/1920/1080?random"
+        src="https://source.unsplash.com/1600x900/?apartment"
         gradient="to top right, rgba(100,115,201,.5), rgba(25,32,72,.6)"
       >
         <v-card-title class="font-weight-bold text-center justify-center display-4">

@@ -3,38 +3,40 @@
     <template>
       <v-expansion-panels v-model="active_class" popout>
         <v-expansion-panel v-for="(item, i) in aptDealList.data" :key="i">
-          <v-expansion-panel-header class="font-weight-bold">{{
-            item.aptName
-          }}</v-expansion-panel-header>
+          <template v-if="check(item.aptName)">
+            <v-expansion-panel-header class="font-weight-bold">{{
+              item.aptName
+            }}</v-expansion-panel-header>
 
-          <v-expansion-panel-content>
-            <v-divider class="mx-4 mb-4"></v-divider>
-            <v-row>
-              <v-col>
-                <div class="aptAttr">거래금액:<br /></div>
-                <div class="aptVal">{{ item.dealAmount }}만원</div>
-              </v-col>
-              <v-divider class="mt-2 mb-2" vertical></v-divider>
-              <v-col>
-                <div class="aptAttr">면적: <br /></div>
-                <div class="aptVal">{{ item.area.substr(0, 6) }} m<sup>2</sup></div>
-              </v-col>
-              <v-divider class="mt-2 mb-2" vertical></v-divider>
-              <v-col>
-                <div class="aptAttr">건축년도 : <br /></div>
-                <div class="aptVal">{{ item.buildYear }}년</div>
-              </v-col>
-            </v-row>
-            <v-divider class="mx-4 mt-4 mb-2"></v-divider>
-            <v-row class="text-center">
-              <v-col>
-                <div class="aptAttr">거래일 :</div>
-                <div class="aptVal">
-                  {{ item.dealYear }}년 {{ item.dealMonth }}월 {{ item.dealDay }}일
-                </div>
-              </v-col>
-            </v-row>
-          </v-expansion-panel-content>
+            <v-expansion-panel-content>
+              <v-divider class="mx-4 mb-4"></v-divider>
+              <v-row>
+                <v-col>
+                  <div class="aptAttr">거래금액:<br /></div>
+                  <div class="aptVal">{{ item.dealAmount }}만원</div>
+                </v-col>
+                <v-divider class="mt-2 mb-2" vertical></v-divider>
+                <v-col>
+                  <div class="aptAttr">면적: <br /></div>
+                  <div class="aptVal">{{ item.area.substr(0, 6) }} m<sup>2</sup></div>
+                </v-col>
+                <v-divider class="mt-2 mb-2" vertical></v-divider>
+                <v-col>
+                  <div class="aptAttr">건축년도 : <br /></div>
+                  <div class="aptVal">{{ item.buildYear }}년</div>
+                </v-col>
+              </v-row>
+              <v-divider class="mx-4 mt-4 mb-2"></v-divider>
+              <v-row class="text-center">
+                <v-col>
+                  <div class="aptAttr">거래일 :</div>
+                  <div class="aptVal">
+                    {{ item.dealYear }}년 {{ item.dealMonth }}월 {{ item.dealDay }}일
+                  </div>
+                </v-col>
+              </v-row>
+            </v-expansion-panel-content>
+          </template>
         </v-expansion-panel>
       </v-expansion-panels>
     </template>
@@ -46,7 +48,7 @@ import { mapState, mapActions } from "vuex";
 
 export default {
   computed: {
-    ...mapState(["aptDealList"]),
+    ...mapState(["aptDealList", "searchKeyword"]),
   },
   data() {
     return { active_class: 0 };
@@ -54,6 +56,15 @@ export default {
   mounted() {},
   methods: {
     ...mapActions(["selectApt"]),
+    check(key) {
+      // 검색 필터링
+      if (!this.searchKeyword) {
+        return true;
+      } else {
+        if (key.includes(this.searchKeyword)) return true;
+      }
+      return false;
+    },
   },
   watch: {
     active_class: function () {
