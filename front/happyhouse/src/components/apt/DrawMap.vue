@@ -9,8 +9,13 @@ import { mapActions, mapState } from "vuex";
 
 export default {
   name: "DrawMap",
+  data() {
+    return {
+      map: "",
+    };
+  },
   computed: {
-    ...mapState(["aptDealList", "dong"]),
+    ...mapState(["aptDealList", "dong", "apt"]),
   },
   mounted() {
     if (window.kakao && window.kakao.maps) {
@@ -27,7 +32,16 @@ export default {
     }
   },
   watch: {
-    aptDealList: function () {},
+    apt: function () {
+      var moveLatLon = new kakao.maps.LatLng(
+        this.aptDealList.data[this.apt].lat,
+        this.aptDealList.data[this.apt].lng
+      );
+
+      // 지도 중심을 부드럽게 이동시킵니다
+      // 만약 이동할 거리가 지도 화면보다 크면 부드러운 효과 없이 이동합니다
+      this.map.panTo(moveLatLon);
+    },
   },
   methods: {
     ...mapActions(["getAptDealList"]),
@@ -46,7 +60,7 @@ export default {
           level: 5, // 지도의 확대 레벨
         };
 
-      var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+      this.map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
 
       // 마커 이미지의 이미지 주소입니다
       var imageSrc =
@@ -61,7 +75,7 @@ export default {
         var pos = new kakao.maps.LatLng(this.aptDealList.data[i].lat, this.aptDealList.data[i].lng);
         // 마커를 생성합니다
         var marker = new kakao.maps.Marker({
-          map: map, // 마커를 표시할 지도
+          map: this.map, // 마커를 표시할 지도
           position: pos, // 마커를 표시할 위치
           title: "gi", // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
           image: markerImage, // 마커 이미지
@@ -69,15 +83,10 @@ export default {
       }
       for (let i = 0; i < this.aptDealList.data.length; i++) {
         // 커스텀 오버레이에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
-        var movePos = new kakao.maps.LatLng(
-          this.aptDealList.data[i].lat,
-          this.aptDealList.data[i].lng
-        );
-
         var content =
-          '<div class="customoverlay" @click = "panTo(map,movePos)">' +
+          '<div class="customoverlay">' +
           "  <div>" +
-          '    <span class="title" >' +
+          '    <span class="title">' +
           this.aptDealList.data[i].aptName +
           "</span>" +
           "  </div>" +
@@ -91,20 +100,13 @@ export default {
 
         // 커스텀 오버레이를 생성합니다
         var customOverlay = new kakao.maps.CustomOverlay({
-          map: map,
+          map: this.map,
           position: position,
           content: content,
           yAnchor: 1,
         });
       }
-      console.log(marker + customOverlay + movePos);
-    },
-    panTo(map, movePos) {
-      // 이동할 위도 경도 위치를 생성합니다
-
-      // 지도 중심을 부드럽게 이동시킵니다
-      // 만약 이동할 거리가 지도 화면보다 크면 부드러운 효과 없이 이동합니다
-      map.panTo(movePos);
+      console.log(marker + customOverlay);
     },
   },
 };

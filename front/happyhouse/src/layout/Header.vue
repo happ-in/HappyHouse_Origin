@@ -7,8 +7,8 @@
         src="https://picsum.photos/1920/1080?random"
         gradient="to top right, rgba(100,115,201,.5), rgba(25,32,72,.6)"
       >
-        <v-card-title class="font-weight-bold text-center justify-center display-4"
-          ><div class="header_title">내 집 마 련</div></v-card-title
+        <v-card-title class="font-weight-bold text-center justify-center display-4">
+          <div class="header_title">내 집 마 련</div></v-card-title
         >
         <div class="header_title">행복한 우리집</div>
       </v-img>
@@ -63,7 +63,7 @@ export default {
       } else {
         alert("로그인 후 이용 가능합니다!");
         if (this.$route.path !== "/") this.$router.push("/");
-
+        // this.active_tab = 0;
         setTimeout(() => {
           this.active_tab = 0;
         }, 100);

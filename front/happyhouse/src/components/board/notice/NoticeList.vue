@@ -16,7 +16,7 @@
         ></v-text-field>
       </v-col>
     </v-row>
-    <v-simple-table>
+    <v-simple-table style="height: 600px">
       <template v-slot:default>
         <thead>
           <tr>
@@ -29,7 +29,9 @@
           <tr v-for="notice in notices" :key="notice.noticeno" class="text-center">
             <td>{{ notice.noticeno }}</td>
             <td>
-              <router-link :to="`/notice/detail/${notice.noticeno}`">{{ notice.title }}</router-link>
+              <router-link :to="`/notice/detail/${notice.noticeno}`">{{
+                notice.title
+              }}</router-link>
             </td>
             <td>{{ notice.regtime }}</td>
           </tr>

@@ -1,9 +1,11 @@
 <template>
   <div class="apt_list overflow-y-auto mx-auto">
     <template>
-      <v-expansion-panels popout>
+      <v-expansion-panels v-model="active_class" popout>
         <v-expansion-panel v-for="(item, i) in aptDealList.data" :key="i">
-          <v-expansion-panel-header>{{ item.aptName }}</v-expansion-panel-header>
+          <v-expansion-panel-header class="font-weight-bold">{{
+            item.aptName
+          }}</v-expansion-panel-header>
 
           <v-expansion-panel-content>
             <v-divider class="mx-4 mb-4"></v-divider>
@@ -15,12 +17,21 @@
               <v-divider class="mt-2 mb-2" vertical></v-divider>
               <v-col>
                 <div class="aptAttr">면적: <br /></div>
-                <div class="aptVal">{{ item.area }}m<sup>2</sup></div>
+                <div class="aptVal">{{ item.area.substr(0, 6) }} m<sup>2</sup></div>
               </v-col>
               <v-divider class="mt-2 mb-2" vertical></v-divider>
               <v-col>
                 <div class="aptAttr">건축년도 : <br /></div>
                 <div class="aptVal">{{ item.buildYear }}년</div>
+              </v-col>
+            </v-row>
+            <v-divider class="mx-4 mt-4 mb-2"></v-divider>
+            <v-row class="text-center">
+              <v-col>
+                <div class="aptAttr">거래일 :</div>
+                <div class="aptVal">
+                  {{ item.dealYear }}년 {{ item.dealMonth }}월 {{ item.dealDay }}일
+                </div>
               </v-col>
             </v-row>
           </v-expansion-panel-content>
@@ -31,17 +42,24 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
+import { mapState, mapActions } from "vuex";
 
 export default {
   computed: {
     ...mapState(["aptDealList"]),
   },
   data() {
-    return {};
+    return { active_class: 0 };
   },
   mounted() {},
-  methods: {},
+  methods: {
+    ...mapActions(["selectApt"]),
+  },
+  watch: {
+    active_class: function () {
+      this.selectApt(this.active_class);
+    },
+  },
 
   created() {},
 };
@@ -59,12 +77,12 @@ export default {
 
 .aptAttr {
   color: #bdbdbd;
-  font-weight: 800;
+  font-weight: 500;
   font-size: 12px;
 }
 
 .aptVal {
-  font-size: 15pt;
+  font-size: 10pt;
   font-weight: bold;
   color: #3f51b5;
 }
