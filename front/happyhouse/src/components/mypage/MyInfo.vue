@@ -42,21 +42,13 @@ export default {
     };
   },
   created() {
-    this.username = JSON.parse(localStorage.getItem("user")).username;
-    axios
-      .get("http://localhost:8888/happyhouse/file", {
-        params: {
-          userid: JSON.parse(localStorage.getItem("user")).userid,
-        },
-      })
-      .then(({ data }) => {
-        console.log(data);
-        this.image = require(`@/assets/${data.folder}/${data.filename}`);
-      })
-      .catch((error) => {
-        console.log(error);
-        this.image = require("@/assets/person.png");
-      });
+    let user = JSON.parse(localStorage.getItem("user"));
+    this.username = user.username;
+    if (user.filename != null || user.filename != "") {
+      this.image = require(`@/assets/${user.folder}/${user.filename}`);
+    } else {
+      this.image = require("@/assets/person.png");
+    }
   },
   methods: {
     fileUploadTag() {
@@ -95,8 +87,7 @@ export default {
 <style>
 @font-face {
   font-family: "Bazzi";
-  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/Bazzi.woff")
-    format("woff");
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/Bazzi.woff") format("woff");
   font-weight: normal;
   font-style: normal;
 }

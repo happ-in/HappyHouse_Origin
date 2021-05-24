@@ -14,6 +14,6 @@ public class User {
     private String address;
     private LocalDate joindate;
     private String role;
-    private String img;
-    private String path;
+    private String folder;
+    private String filename;
 }

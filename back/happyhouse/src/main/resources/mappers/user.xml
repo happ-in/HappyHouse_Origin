@@ -4,9 +4,9 @@
 
 <mapper namespace="com.ssafy.happyhouse.model.repository.UserRepository">
     <select id="findByIdAndPassword" parameterType="user" resultType="user">
-        select  *
-        from    user
-        where   userid=#{userid} and userpwd=#{userpwd}
+        select  u.userid, u.username, u.userpwd, u.email, u.address, u.joindate, u.role, f.filename, f.folder
+        from    user u left join fileinfo f on u.userid=f.userid
+        where   u.userid=#{userid} and u.userpwd=#{userpwd}
     </select>
 
     <insert id="join" parameterType="user">
