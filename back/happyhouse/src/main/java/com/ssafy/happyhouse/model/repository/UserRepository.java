@@ -13,4 +13,7 @@ public interface UserRepository {
 
     User findById(String userid);
 
+    int update(User user);
+
+    int delete(String userid);
 }

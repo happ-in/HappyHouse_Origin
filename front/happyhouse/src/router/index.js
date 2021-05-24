@@ -57,7 +57,6 @@ const routes = [
   {
     path: "/mypage",
     component: () => import("@/views/MyPage.vue"),
-    children: [],
   },
 ];
 

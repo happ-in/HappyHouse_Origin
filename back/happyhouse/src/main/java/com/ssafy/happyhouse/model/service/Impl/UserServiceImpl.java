@@ -31,4 +31,14 @@ public class UserServiceImpl implements UserService {
     public User findById(String userid) {
         return sqlSession.getMapper(UserRepository.class).findById(userid);
     }
+
+    @Override
+    public boolean update(User user) {
+        return sqlSession.getMapper(UserRepository.class).update(user) == 1;
+    }
+
+    @Override
+    public boolean delete(String userid) {
+        return sqlSession.getMapper(UserRepository.class).delete(userid) == 1;
+    }
 }

@@ -25,8 +25,8 @@
     <br />
 
     <div class="text-center text-font">
-      <router-link to="/">회원정보수정</router-link> <br />
-      <router-link to="/">회원탈퇴</router-link>
+      <user-modify></user-modify>
+      <user-delete></user-delete>
     </div>
     <router-view></router-view>
   </v-container>
@@ -34,11 +34,19 @@
 
 <script>
 import axios from "axios";
+import UserModify from "@/components/user/UserModify.vue";
+import UserDelete from "@/components/user/UserDelete.vue";
 export default {
+  components: {
+    UserModify,
+    UserDelete,
+  },
   data() {
+    UserModify;
     return {
       username: "",
       image: "",
+      active: false,
     };
   },
   created() {

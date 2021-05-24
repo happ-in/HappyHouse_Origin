@@ -10,4 +10,8 @@ public interface UserService {
     boolean findByIdList(String userid);
 
     User findById(String userid);
+
+    boolean update(User user);
+
+    boolean delete(String userid);
 }

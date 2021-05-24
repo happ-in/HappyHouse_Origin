@@ -14,34 +14,12 @@
               <v-text-field label="ID" v-model="id" hide-details="auto" ref="id"></v-text-field>
               <v-btn class="ml-5 mt-3" outlined @click="checkID">중복 확인</v-btn>
             </div>
-            <v-text-field
-              type="password"
-              label="Password"
-              v-model="pw"
-              hide-details="auto"
-              ref="pw"
-            ></v-text-field>
-            <v-text-field
-              label="Username"
-              v-model="username"
-              hide-details="auto"
-              ref="username"
-            ></v-text-field>
-            <v-text-field
-              label="E-mail"
-              v-model="email"
-              hide-details="auto"
-              ref="email"
-            ></v-text-field>
+            <v-text-field type="password" label="Password" v-model="pw" hide-details="auto" ref="pw"></v-text-field>
+            <v-text-field label="Username" v-model="username" hide-details="auto" ref="username"></v-text-field>
+            <v-text-field label="E-mail" v-model="email" hide-details="auto" ref="email"></v-text-field>
 
             <div class="d-flex">
-              <v-text-field
-                label="Address"
-                v-model="address"
-                hide-details="auto"
-                ref="address"
-                disabled
-              ></v-text-field>
+              <v-text-field label="Address" v-model="address" hide-details="auto" ref="address" disabled></v-text-field>
               <v-btn class="ml-5 mt-3" outlined @click="showApi">주소 찾기</v-btn>
             </div>
 
@@ -50,8 +28,8 @@
 
           <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn color="primary" text @click="join"> 확인 </v-btn>
-            <v-btn color="primary" text @click="closeDialog"> 취소 </v-btn>
+            <v-btn color="primary" text @click="closeDialog"> Cancel </v-btn>
+            <v-btn color="primary" text @click="join"> Join </v-btn>
           </v-card-actions>
         </v-card>
       </v-dialog>

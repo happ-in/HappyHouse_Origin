@@ -26,4 +26,9 @@ public class FileServiceImpl implements FileService {
     public FileInfo findById(String userid) {
         return sqlSession.getMapper(FileRepository.class).findById(userid);
     }
+
+    @Override
+    public boolean delete(String userid) {
+        return sqlSession.getMapper(FileRepository.class).delete(userid) == 1;
+    }
 }

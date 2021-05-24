@@ -19,4 +19,9 @@
                 filename=#{filename}
         where   userid=#{userid}
     </update>
+
+    <delete id="delete" parameterType="string">
+        delete  from fileinfo
+        where   userid=#{userid}
+    </delete>
 </mapper>

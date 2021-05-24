@@ -6,4 +6,5 @@ public interface FileService {
     boolean save(FileInfo image);
     boolean update(FileInfo image);
     FileInfo findById(String userid);
+    boolean delete(String userid);
 }
