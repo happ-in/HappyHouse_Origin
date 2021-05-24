@@ -17,7 +17,7 @@ export default {
     };
   },
   computed: {
-    ...mapState(["aptDealList", "dong", "apt", "searchKeyword"]),
+    ...mapState(["range", "aptDealList", "dong", "apt", "searchKeyword"]),
   },
   mounted() {
     if (window.kakao && window.kakao.maps) {
