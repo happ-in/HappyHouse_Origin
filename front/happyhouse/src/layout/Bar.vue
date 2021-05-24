@@ -32,8 +32,8 @@ export default {
   methods: {
     logout() {
       localStorage.clear();
-      if (this.$route.path === "/mypage") this.$router.replace("/");
-      else this.$router.go("this.$router.currentRoute");
+      if (this.$route.path === "/mypage") this.$router.push("/");
+      this.$router.go(this.$router.currentRoute);
     },
   },
 };
