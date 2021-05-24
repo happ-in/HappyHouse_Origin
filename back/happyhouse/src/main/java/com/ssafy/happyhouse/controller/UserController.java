@@ -33,9 +33,14 @@ public class UserController {
     @GetMapping("/validate")
     public ResponseEntity<String> IdCheck(HttpServletRequest request) {
         String userid = request.getParameter("id");
-        if (service.findById(userid)) {
+        if (service.findByIdList(userid)) {
             return new ResponseEntity<>(SUCCESS, HttpStatus.OK);
         }
         return new ResponseEntity<>(FAIL, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    @GetMapping("/user/{userid}")
+    public ResponseEntity<User> getUer(@PathVariable String userid) {
+        return new ResponseEntity<>(service.findById(userid), HttpStatus.OK);
     }
 }

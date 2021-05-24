@@ -24,7 +24,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean findById(String userid) {
-        return sqlSession.getMapper(UserRepository.class).findById(userid).size() == 0;
+    public boolean findByIdList(String userid) {
+        return sqlSession.getMapper(UserRepository.class).findByIdList(userid).size() == 0;
+    }
+    @Override
+    public User findById(String userid) {
+        return sqlSession.getMapper(UserRepository.class).findById(userid);
     }
 }

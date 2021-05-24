@@ -7,5 +7,7 @@ public interface UserService {
 
     boolean join(User user);
 
-    boolean findById(String userid);
+    boolean findByIdList(String userid);
+
+    User findById(String userid);
 }

@@ -1,7 +1,9 @@
 package com.ssafy.happyhouse.controller;
 
 import com.ssafy.happyhouse.model.domain.FileInfo;
+import com.ssafy.happyhouse.model.domain.User;
 import com.ssafy.happyhouse.model.service.FileService;
+import com.ssafy.happyhouse.model.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,8 +28,11 @@ public class FileController {
     @Autowired
     FileService service;
 
+    @Autowired
+    UserService userService;
+
     @PostMapping
-    public ResponseEntity<String> UserImage(MultipartFile file, HttpServletRequest request) {
+    public ResponseEntity<User> UserImage(MultipartFile file, HttpServletRequest request) {
         String userid = request.getParameter("userid");
         String today = new SimpleDateFormat("yyMMdd").format(new Date());
         String saveFolder = "../../front/happyhouse/src/assets/" + today;
@@ -42,14 +47,14 @@ public class FileController {
             image.setFilename(saveFileName);
             image.setFolder(today);
             if (service.findById(userid) == null) {
-                if (service.save(image)) return new ResponseEntity<>(SUCCESS, HttpStatus.OK);
+                if (service.save(image)) return new ResponseEntity<>(userService.findById(userid), HttpStatus.OK);
             } else {
-                if (service.update(image)) return new ResponseEntity<>(SUCCESS, HttpStatus.OK);
+                if (service.update(image)) return new ResponseEntity<>(userService.findById(userid), HttpStatus.OK);
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return new ResponseEntity<>(FAIL, HttpStatus.INTERNAL_SERVER_ERROR);
+        return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
     @GetMapping

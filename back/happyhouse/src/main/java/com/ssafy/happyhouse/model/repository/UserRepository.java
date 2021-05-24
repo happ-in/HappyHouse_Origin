@@ -9,5 +9,8 @@ public interface UserRepository {
 
     int join(User user);
 
-    List<User> findById(String userid);
+    List<User> findByIdList(String userid);
+
+    User findById(String userid);
+
 }

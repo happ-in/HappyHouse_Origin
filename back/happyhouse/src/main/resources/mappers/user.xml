@@ -14,9 +14,15 @@
         values(#{userid}, #{username}, #{userpwd}, #{email}, #{address}, now(), #{role})
     </insert>
 
-    <select id="findById" parameterType="string" resultType="user">
+    <select id="findByIdList" parameterType="string" resultType="user">
         select  *
         from    user
         where   userid=#{userid}
+    </select>
+
+    <select id="findById" parameterType="string" resultType="user">
+        select  u.userid, u.username, u.userpwd, u.email, u.address, u.joindate, u.role, f.filename, f.folder
+        from    user u left join fileinfo f on u.userid=f.userid
+        where   u.userid=#{userid}
     </select>
 </mapper>

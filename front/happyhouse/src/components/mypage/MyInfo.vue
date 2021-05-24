@@ -44,7 +44,7 @@ export default {
   created() {
     let user = JSON.parse(localStorage.getItem("user"));
     this.username = user.username;
-    if (user.filename != null || user.filename != "") {
+    if (user.filename) {
       this.image = require(`@/assets/${user.folder}/${user.filename}`);
     } else {
       this.image = require("@/assets/person.png");
@@ -55,11 +55,9 @@ export default {
       this.$refs.image.$refs.input.click();
     },
     saveImg() {
-      console.log(this.filename);
       this.saveBtn = false;
     },
     selectFile(file) {
-      if (file) console.log(file);
       let image = new FormData();
       image.append("title", this.name);
       image.append("file", file);
@@ -73,8 +71,8 @@ export default {
             userid: JSON.parse(localStorage.getItem("user")).userid,
           },
         })
-        .then(() => {
-          console.log("success");
+        .then(({ data }) => {
+          localStorage.setItem("user", JSON.stringify(data));
         })
         .catch(() => {
           console.log("fail");
