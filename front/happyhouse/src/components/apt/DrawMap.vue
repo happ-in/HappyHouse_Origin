@@ -12,10 +12,12 @@ export default {
   data() {
     return {
       map: "",
+      overlays: [],
+      markers: [],
     };
   },
   computed: {
-    ...mapState(["aptDealList", "dong", "apt"]),
+    ...mapState(["aptDealList", "dong", "apt", "searchKeyword"]),
   },
   mounted() {
     if (window.kakao && window.kakao.maps) {
@@ -33,15 +35,20 @@ export default {
   },
   watch: {
     apt: function () {
-      var moveLatLon = new kakao.maps.LatLng(
-        this.aptDealList.data[this.apt].lat,
-        this.aptDealList.data[this.apt].lng
-      );
-      this.map.setLevel(2);
-      // 지도 중심을 부드럽게 이동시킵니다
-      // 만약 이동할 거리가 지도 화면보다 크면 부드러운 효과 없이 이동합니다
-      this.map.panTo(moveLatLon);
-      // setLevel 시 애니메이션 효과의 지속시간을 500ms로 설정
+      if (this.apt) {
+        var moveLatLon = new kakao.maps.LatLng(
+          this.aptDealList.data[this.apt].lat,
+          this.aptDealList.data[this.apt].lng
+        );
+        this.map.setLevel(2);
+        // 지도 중심을 부드럽게 이동시킵니다
+        // 만약 이동할 거리가 지도 화면보다 크면 부드러운 효과 없이 이동합니다
+        this.map.panTo(moveLatLon);
+        // setLevel 시 애니메이션 효과의 지속시간을 500ms로 설정
+      }
+    },
+    searchKeyword: function () {
+      this.$router.go();
     },
   },
   methods: {
@@ -67,6 +74,9 @@ export default {
       var imageSrc = "http://assets.stickpng.com/images/58889219bc2fc2ef3a1860aa.png";
 
       for (let i = 0; i < this.aptDealList.data.length; i++) {
+        if (!this.aptDealList.data[i].aptName.includes(this.searchKeyword)) {
+          continue;
+        }
         // 마커 이미지의 이미지 크기 입니다
         var imageSize = new kakao.maps.Size(24, 35);
         // 마커 이미지를 생성합니다
@@ -82,6 +92,9 @@ export default {
         });
       }
       for (let i = 0; i < this.aptDealList.data.length; i++) {
+        if (!this.aptDealList.data[i].aptName.includes(this.searchKeyword)) {
+          continue;
+        }
         // 커스텀 오버레이에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
         var content =
           '<div class="customoverlay">' +
@@ -105,7 +118,14 @@ export default {
           content: content,
           yAnchor: 1,
         });
+
+        //overlays.push(customOverlay);
       }
+      // 아래와 같이 옵션을 입력하지 않아도 된다
+      var zoomControl = new kakao.maps.ZoomControl();
+
+      // 지도 오른쪽에 줌 컨트롤이 표시되도록 지도에 컨트롤을 추가한다.
+      this.map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
       console.log(marker + customOverlay);
     },
   },
@@ -154,8 +174,6 @@ export default {
   font-weight: bold;
   overflow: hidden;
   background: #d95050;
-  background: #d95050 url(http://assets.stickpng.com/images/58889219bc2fc2ef3a1860aa.png) no-repeat
-    right 14px center;
 }
 .customoverlay .title {
   display: block;

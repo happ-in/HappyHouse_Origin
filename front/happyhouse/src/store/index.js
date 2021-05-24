@@ -14,7 +14,7 @@ export default new Vuex.Store({
   state: {
     gu: Object, // 현재 선택된 구
     dong: Object, // 현재 선택된 동
-    apt: Object,
+    apt: Object, // 현재 선택된 아파트의 list num
     searchKeyword: Object, // 검색하려는 키워드
 
     dongs: [], // 구에 해당하는 동 목록
