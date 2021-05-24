@@ -12,12 +12,16 @@ export default new Vuex.Store({
   ],
   modules: {},
   state: {
-    gu: Object,
-    dong: Object,
+    gu: Object, // 현재 선택된 구
+    dong: Object, // 현재 선택된 동
+    apt: Object,
     dongs: [], // 구에 해당하는 동 목록
-    aptDealList: [],
+    aptDealList: [], // 동에 해당하는 거래 목록
   },
   mutations: {
+    SELECT_APT(state, apt) {
+      state.apt = apt;
+    },
     GET_APT_DEAL_LIST(state, list) {
       state.aptDealList = list;
     },
@@ -32,6 +36,9 @@ export default new Vuex.Store({
     },
   },
   actions: {
+    selectApt({ commit }, apt) {
+      commit("SELECT_APT", apt);
+    },
     getAptDealList({ commit }, dong) {
       const SERVICE_URL =
       'http://localhost:8888/happyhouse/apt';
