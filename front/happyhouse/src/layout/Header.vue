@@ -18,6 +18,7 @@
         <v-tab @click="moveToNotice"> 공지사항 </v-tab>
         <v-tab @click="moveToQna"> Q & A </v-tab>
         <v-tab @click="checkLogin"> 마이 페이지 </v-tab>
+        <v-tab @click="moveToGraph"> 그래프 </v-tab>
       </v-tabs>
     </v-card>
   </div>
@@ -51,6 +52,10 @@ export default {
     },
     moveToNotice() {
       if (this.$route.path !== "/notice") this.$router.push("/notice");
+    },
+
+    moveToGraph() {
+      this.$router.push("/graph");
     },
 
     moveToQna() {

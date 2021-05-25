@@ -5,6 +5,10 @@ Vue.use(VueRouter);
 
 const routes = [
   {
+    path: "/graph",
+    component: () => import("@/views/Graph.vue"),
+  },
+  {
     path: "/",
     component: () => import("@/views/Home.vue"),
     // component: () => import("@/components/home/NewsList.vue"),

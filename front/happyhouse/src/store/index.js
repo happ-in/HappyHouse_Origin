@@ -2,8 +2,12 @@ import Vue from "vue";
 import Vuex from "vuex";
 import axios from "axios";
 import createPersistedState from "vuex-persistedstate";
+import { VTooltip, VPopover, VClosePopover } from "v-tooltip";
 
 Vue.use(Vuex);
+Vue.directive("tooltip", VTooltip);
+Vue.directive("close-popover", VClosePopover);
+Vue.component("v-popover", VPopover);
 
 export default new Vuex.Store({
   plugins: [createPersistedState()],
@@ -49,11 +53,11 @@ export default new Vuex.Store({
       var a = range[0] * 10000;
       var b = range[1] * 10000;
       console.log(range[2]);
-      
+
       const params = {
         dong: range[2],
-        min:a,
-        max:b,
+        min: a,
+        max: b,
       };
 
       axios
