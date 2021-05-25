@@ -1,15 +1,12 @@
 import Vue from "vue";
 import Vuex from "vuex";
 import axios from "axios";
-import createPersistedState from 'vuex-persistedstate';
-
+import createPersistedState from "vuex-persistedstate";
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
-  plugins: [
-    createPersistedState(),
-  ],
+  plugins: [createPersistedState()],
   modules: {},
   state: {
     gu: Object, // 현재 선택된 구
@@ -17,11 +14,15 @@ export default new Vuex.Store({
     apt: Object, // 현재 선택된 아파트의 list num
     searchKeyword: Object, // 검색하려는 키워드
 
+    range: [],
     dongs: [], // 구에 해당하는 동 목록
     aptDealList: [], // 동에 해당하는 거래 목록
-    
   },
   mutations: {
+    GET_PRICE_RANGE(state, range) {
+      state.range = range;
+    },
+
     GET_KEYWORD(state, key) {
       state.searchKeyword = key;
     },
@@ -42,6 +43,32 @@ export default new Vuex.Store({
     },
   },
   actions: {
+    getPriceRange({ commit }, range) {
+      const SERVICE_URL = "http://localhost:8888/happyhouse/apt/price";
+
+      var a = range[0] * 10000;
+      var b = range[1] * 10000;
+      console.log(range[2]);
+      
+      const params = {
+        dong: range[2],
+        min:a,
+        max:b,
+      };
+
+      axios
+        .get(SERVICE_URL, {
+          params,
+        })
+        .then((response) => {
+          console.log(response);
+          commit("GET_APT_DEAL_LIST", response);
+        })
+        .catch((error) => {
+          console.dir(error);
+        });
+      commit("GET_PRICE_RANGE", range);
+    },
     getKeyword({ commit }, key) {
       commit("GET_KEYWORD", key);
     },
@@ -50,23 +77,22 @@ export default new Vuex.Store({
       commit("SELECT_APT", apt);
     },
     getAptDealList({ commit }, dong) {
-      const SERVICE_URL =
-      'http://localhost:8888/happyhouse/apt';
+      const SERVICE_URL = "http://localhost:8888/happyhouse/apt";
 
-    const params = {
-      dong: dong,
-    };
-      
-    axios
-    .get(SERVICE_URL, {
-      params,
-    })
-      .then((response) => {
-     commit('GET_APT_DEAL_LIST',response);
-    })
-    .catch((error) => {
-      console.dir(error);
-    });
+      const params = {
+        dong: dong,
+      };
+
+      axios
+        .get(SERVICE_URL, {
+          params,
+        })
+        .then((response) => {
+          commit("GET_APT_DEAL_LIST", response);
+        })
+        .catch((error) => {
+          console.dir(error);
+        });
     },
 
     selectDong({ commit }, dong) {
@@ -631,5 +657,4 @@ export default new Vuex.Store({
       }
     },
   },
-  
 });
