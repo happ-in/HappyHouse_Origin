@@ -18,7 +18,9 @@
           <v-card> <news-list> </news-list> </v-card>
         </v-col>
         <v-col cols="12" sm="6">
-          <v-card><draw-graph></draw-graph> </v-card>
+          <v-card>
+            <v-img src="@/assets/seoulChart.png" />
+          </v-card>
         </v-col>
       </v-row>
     </v-container>
@@ -29,7 +31,6 @@
 import DrawMap from "@/components/home/DrawMap.vue";
 import NewsList from "@/components/home/NewsList.vue";
 import DongList from "@/components/home/DongList.vue";
-import DrawGraph from "@/components/home/DrawGraph.vue";
 
 export default {
   name: "Home",
@@ -38,7 +39,6 @@ export default {
     NewsList,
     DrawMap,
     DongList,
-    DrawGraph,
   },
 };
 </script>
@@ -46,8 +46,7 @@ export default {
 <style scoped>
 @font-face {
   font-family: "this_is_font_name";
-  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_twelve@1.1/Cafe24Simplehae.woff")
-    format("woff");
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_twelve@1.1/Cafe24Simplehae.woff") format("woff");
 
   font-weight: normal;
   font-style: normal;
