@@ -18,9 +18,22 @@
           <v-card> <news-list> </news-list> </v-card>
         </v-col>
         <v-col cols="12" sm="6">
-          <v-card>
-            <v-img src="@/assets/seoulChart.png" />
-          </v-card>
+          <v-row>
+            <v-card>
+              <v-img src="@/assets/seoulChart.png" />
+            </v-card>
+            <v-card color="mt-3">
+              <iframe
+                width="600"
+                height="400"
+                src="https://www.youtube.com/embed/x9tYdmBQiSQ?autoplay=1"
+                title="YouTube video player"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen
+              ></iframe>
+            </v-card>
+          </v-row>
         </v-col>
       </v-row>
     </v-container>
