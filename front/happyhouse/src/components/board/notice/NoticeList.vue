@@ -29,7 +29,9 @@
           <tr v-for="notice in notices" :key="notice.noticeno" class="text-center">
             <td>{{ notice.noticeno }}</td>
             <td>
-              <router-link :to="`/notice/detail/${notice.noticeno}`">{{ notice.title }}</router-link>
+              <router-link :to="`/notice/detail/${notice.noticeno}`">{{
+                notice.title
+              }}</router-link>
             </td>
             <td>{{ notice.regtime }}</td>
           </tr>
@@ -116,7 +118,13 @@ export default {
       if (user && user.role === "ADMIN") {
         this.$router.push("/notice/create");
       } else {
-        alert("관리자만 이용 가능합니다!");
+        this.$swal.fire({
+          icon: "error",
+          width: 370,
+          title: "관리자 권한이 필요합니다.",
+          showConfirmButton: false,
+          timer: 1500,
+        });
       }
     },
   },

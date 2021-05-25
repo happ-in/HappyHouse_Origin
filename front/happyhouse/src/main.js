@@ -4,10 +4,19 @@ import router from "./router";
 import store from "./store";
 import vuetify from "./plugins/vuetify";
 import axios from 'axios';
+import LoadScript from 'vue-plugin-load-script';
+import VueSweetalert2 from 'vue-sweetalert2';
+
+// If you don't need the styles, do not connect
+import 'sweetalert2/dist/sweetalert2.min.css';
+
+Vue.use(VueSweetalert2);
 
 Vue.prototype.$http = axios;
+Vue.use(LoadScript);
 
 Vue.config.productionTip = false;
+
 
 new Vue({
   router,

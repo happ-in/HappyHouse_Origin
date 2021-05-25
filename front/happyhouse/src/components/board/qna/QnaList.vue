@@ -74,7 +74,13 @@ export default {
       if (localStorage.getItem("user")) {
         this.$router.push("qna/create");
       } else {
-        alert("로그인 후 이용 가능합니다!");
+        this.$swal.fire({
+          icon: "error",
+          width: 310,
+          title: "로그인이 필요합니다.",
+          showConfirmButton: false,
+          timer: 1500,
+        });
       }
     },
     searchByKeyword(pageno) {

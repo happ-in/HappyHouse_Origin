@@ -7,7 +7,14 @@
         </template>
 
         <v-card v-if="!isForgotPwd">
-          <v-card-title class="headline lighten-2"> Login </v-card-title>
+          <v-card-title class="ma-0 align-center">
+            <v-img
+              style="margin: 0 auto"
+              max-height="150"
+              max-width="250"
+              src="@/assets/logo.png"
+            ></v-img>
+          </v-card-title>
 
           <v-container>
             <v-text-field label="ID" v-model="id" hide-details="auto"></v-text-field>
@@ -15,7 +22,7 @@
           </v-container>
 
           <div class="text-center">
-            <a href="#" @click="isForgotPwd = true">Forgot Password?</a>
+            <a href="#" @click="isForgotPwd = true">비밀번호 찾기</a>
             <br />
           </div>
 
