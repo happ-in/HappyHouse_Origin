@@ -28,8 +28,7 @@ export default {
       const script = document.createElement("script");
       /* global kakao */
       script.onload = () => kakao.maps.load(this.initMap);
-      script.src =
-        "http://dapi.kakao.com/v2/maps/sdk.js?autoload=false&appkey=d6752363187651fd8e9c4f66a13317cd";
+      script.src = "http://dapi.kakao.com/v2/maps/sdk.js?autoload=false&appkey=d6752363187651fd8e9c4f66a13317cd";
       document.head.appendChild(script);
     }
   },
@@ -71,7 +70,7 @@ export default {
       this.map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
 
       // 마커 이미지의 이미지 주소입니다
-      var imageSrc = "http://assets.stickpng.com/images/58889219bc2fc2ef3a1860aa.png";
+      var imageSrc = require("@/assets/marker.png");
 
       for (let i = 0; i < this.aptDealList.data.length; i++) {
         if (!this.aptDealList.data[i].aptName.includes(this.searchKeyword)) {
@@ -106,10 +105,7 @@ export default {
           "</div>";
 
         // 커스텀 오버레이가 표시될 위치입니다
-        var position = new kakao.maps.LatLng(
-          this.aptDealList.data[i].lat,
-          this.aptDealList.data[i].lng
-        );
+        var position = new kakao.maps.LatLng(this.aptDealList.data[i].lat, this.aptDealList.data[i].lng);
 
         // 커스텀 오버레이를 생성합니다
         var customOverlay = new kakao.maps.CustomOverlay({
