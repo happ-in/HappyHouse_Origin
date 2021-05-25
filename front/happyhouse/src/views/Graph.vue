@@ -17,6 +17,7 @@
 </template>
 
 <script>
+import axios from "axios";
 export default {
   created() {
     axios
@@ -25,7 +26,6 @@ export default {
         console.log(data);
       });
   },
-
   data() {
     return {
       section: [
