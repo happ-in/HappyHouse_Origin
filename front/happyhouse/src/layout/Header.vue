@@ -68,7 +68,7 @@ export default {
       } else {
         this.$swal.fire({
           icon: "error",
-          width: 310,
+          width: 350,
           title: "로그인이 필요합니다.",
           showConfirmButton: false,
           timer: 1500,
@@ -107,7 +107,6 @@ export default {
   text-align: center;
   font-family: tway_sky;
 }
-
 /* 상단 고정 */
 /* .header {
   z-index: 9;

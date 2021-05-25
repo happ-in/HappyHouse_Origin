@@ -8,21 +8,16 @@
 
         <v-card v-if="!isForgotPwd">
           <v-card-title class="ma-0 align-center">
-            <v-img
-              style="margin: 0 auto"
-              max-height="150"
-              max-width="250"
-              src="@/assets/logo.png"
-            ></v-img>
+            <v-img style="margin: 0 auto" max-height="150" max-width="250" src="@/assets/logo.png"></v-img>
           </v-card-title>
 
           <v-container>
-            <v-text-field label="ID" v-model="id" hide-details="auto"></v-text-field>
-            <v-text-field type="password" label="Password" v-model="pw"></v-text-field>
+            <v-text-field label="아이디" v-model="id" hide-details="auto"></v-text-field>
+            <v-text-field type="password" label="비밀번호" v-model="pw"></v-text-field>
           </v-container>
 
-          <div class="text-center">
-            <a href="#" @click="isForgotPwd = true">비밀번호 찾기</a>
+          <div class="text-center mb-3">
+            <a class="font-weight-bold" href="#" @click="isForgotPwd = true">비밀번호 찾기</a>
             <br />
           </div>
 
@@ -30,8 +25,8 @@
 
           <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn color="primary" text @click="cancel"> Cancel </v-btn>
-            <v-btn color="primary" text @click="loginCheck"> Login </v-btn>
+            <v-btn class="font-weight-bold" color="primary" text @click="cancel"> 취소 </v-btn>
+            <v-btn class="font-weight-bold" color="primary" text @click="loginCheck"> 로그인 </v-btn>
           </v-card-actions>
         </v-card>
 
