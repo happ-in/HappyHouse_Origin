@@ -3,21 +3,32 @@
     <div class="text-center">
       <v-dialog v-model="dialog" width="374">
         <template v-slot:activator="{ on, attrs }">
-          <v-btn outlined rounded v-bind="attrs" v-on="on"> Sign In </v-btn>
+          <v-btn outlined rounded v-bind="attrs" v-on="on"> 로그인 </v-btn>
         </template>
 
         <v-card v-if="!isForgotPwd">
           <v-card-title class="ma-0 align-center">
-            <v-img style="margin: 0 auto" max-height="150" max-width="250" src="@/assets/logo.png"></v-img>
+            <v-img
+              style="margin: 0 auto"
+              max-height="150"
+              max-width="250"
+              src="@/assets/logo.png"
+            ></v-img>
           </v-card-title>
 
           <v-container>
-            <v-text-field label="아이디" v-model="id" hide-details="auto"></v-text-field>
-            <v-text-field type="password" label="비밀번호" v-model="pw"></v-text-field>
+            <div class="d-flex">
+              <v-icon class="mt-5 mr-3">mdi-account</v-icon>
+              <v-text-field label="아이디" v-model="id" hide-details="auto"></v-text-field>
+            </div>
+            <div class="d-flex">
+              <v-icon class="mr-3">mdi-lock</v-icon>
+              <v-text-field type="password" label="비밀번호" v-model="pw"></v-text-field>
+            </div>
           </v-container>
 
           <div class="text-center mb-3">
-            <a class="font-weight-bold" href="#" @click="isForgotPwd = true">비밀번호 찾기</a>
+            <a style="color: grey" href="#" @click="isForgotPwd = true">비밀번호 찾기</a>
             <br />
           </div>
 
@@ -26,22 +37,40 @@
           <v-card-actions>
             <v-spacer></v-spacer>
             <v-btn class="font-weight-bold" color="primary" text @click="cancel"> 취소 </v-btn>
-            <v-btn class="font-weight-bold" color="primary" text @click="loginCheck"> 로그인 </v-btn>
+            <v-btn class="font-weight-bold" color="primary" text @click="loginCheck">
+              로그인
+            </v-btn>
           </v-card-actions>
         </v-card>
 
         <v-card v-else>
-          <v-card-title class="headline lighten-2"> Find Password </v-card-title>
+          <v-card-title class="ma-0 align-center">
+            <v-img
+              style="margin: 0 auto"
+              max-height="150"
+              max-width="250"
+              src="@/assets/logo.png"
+            ></v-img>
+          </v-card-title>
 
           <v-container>
-            <v-text-field label="ID" v-model="findId" hide-details="auto"></v-text-field>
-            <v-text-field label="Email" v-model="findEmail"></v-text-field>
+            <v-text-field
+              label="아이디를 입력해 주세요."
+              v-model="findId"
+              hide-details="auto"
+            ></v-text-field>
+            <v-text-field label="이메일을 입력해 주세요." v-model="findEmail"></v-text-field>
+            <p class="caption">
+              <v-icon>mdi-exclamation-thick</v-icon>
+
+              임시 비밀번호가 이메일로 전송됩니다.
+            </p>
           </v-container>
 
           <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn color="primary" text @click="isForgotPwd = false"> Cancel </v-btn>
-            <v-btn color="primary" text @click="findPwd"> Send </v-btn>
+            <v-btn color="primary" text @click="isForgotPwd = false"> 뒤로 </v-btn>
+            <v-btn color="primary" text @click="findPwd"> 전송 </v-btn>
           </v-card-actions>
         </v-card>
       </v-dialog>

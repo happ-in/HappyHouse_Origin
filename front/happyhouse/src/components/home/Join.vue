@@ -3,45 +3,69 @@
     <div class="text-center">
       <v-dialog v-model="dialog" width="374">
         <template v-slot:activator="{ on, attrs }">
-          <v-btn outlined rounded v-bind="attrs" v-on="on"> Sign up </v-btn>
+          <v-btn outlined rounded v-bind="attrs" v-on="on"> 회원가입 </v-btn>
         </template>
 
         <v-card>
-          <v-card-title class="headline lighten-2"> Sign up </v-card-title>
-
+          <v-card-title class="ma-0 align-center">
+            <v-img
+              style="margin: 0 auto"
+              max-height="150"
+              max-width="250"
+              src="@/assets/logo.png"
+            ></v-img>
+          </v-card-title>
           <v-container>
             <div class="d-flex">
-              <v-text-field label="ID" v-model="id" hide-details="auto" ref="id"></v-text-field>
+              <v-icon class="mt-5 mr-3">mdi-account</v-icon>
+
+              <v-text-field label="아이디" v-model="id" hide-details="auto" ref="id"></v-text-field>
               <v-btn class="ml-5 mt-3" outlined @click="checkID">중복 확인</v-btn>
             </div>
-            <v-text-field
-              type="password"
-              label="Password"
-              v-model="pw"
-              hide-details="auto"
-              ref="pw"
-            ></v-text-field>
-            <v-text-field
-              label="Username"
-              v-model="username"
-              hide-details="auto"
-              ref="username"
-            ></v-text-field>
-            <v-text-field
-              label="E-mail"
-              v-model="email"
-              hide-details="auto"
-              ref="email"
-            ></v-text-field>
+            <div class="d-flex">
+              <v-icon class="mt-5 mr-3">mdi-lock</v-icon>
+
+              <v-text-field
+                type="password"
+                label="비밀번호"
+                v-model="pw"
+                hide-details="auto"
+                ref="pw"
+              ></v-text-field>
+            </div>
 
             <div class="d-flex">
+              <v-icon class="mt-5 mr-3">mdi-face</v-icon>
               <v-text-field
-                label="Address"
+                label="이름"
+                v-model="username"
+                hide-details="auto"
+                ref="username"
+              ></v-text-field>
+            </div>
+
+            <div class="d-flex">
+              <v-icon class="mt-5 mr-3">mdi-email</v-icon>
+
+              <v-text-field
+                label="이메일"
+                v-model="email"
+                hide-details="auto"
+                ref="email"
+              ></v-text-field>
+            </div>
+
+            <div class="d-flex">
+              <v-icon class="mt-5 mr-3">mdi-home</v-icon>
+
+              <v-text-field
+                label="주소"
                 v-model="address"
                 hide-details="auto"
                 ref="address"
                 disabled
-              ></v-text-field>
+              >
+              </v-text-field>
               <v-btn class="ml-5 mt-3" outlined @click="showApi">주소 찾기</v-btn>
             </div>
 
@@ -50,8 +74,8 @@
 
           <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn color="primary" text @click="closeDialog"> Cancel </v-btn>
-            <v-btn color="primary" text @click="join"> Join </v-btn>
+            <v-btn class="font-weight-bold" color="primary" text @click="closeDialog"> 취소 </v-btn>
+            <v-btn class="font-weight-bold" color="primary" text @click="join"> 회원가입 </v-btn>
           </v-card-actions>
         </v-card>
       </v-dialog>
