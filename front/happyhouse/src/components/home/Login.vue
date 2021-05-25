@@ -54,17 +54,17 @@
           </v-card-title>
 
           <v-container>
+            <p class="caption">
+              <v-icon class="mb-1" color="red">mdi-exclamation-thick</v-icon>
+
+              임시 비밀번호가 이메일로 전송됩니다.
+            </p>
             <v-text-field
               label="아이디를 입력해 주세요."
               v-model="findId"
               hide-details="auto"
             ></v-text-field>
             <v-text-field label="이메일을 입력해 주세요." v-model="findEmail"></v-text-field>
-            <p class="caption">
-              <v-icon>mdi-exclamation-thick</v-icon>
-
-              임시 비밀번호가 이메일로 전송됩니다.
-            </p>
           </v-container>
 
           <v-card-actions>
