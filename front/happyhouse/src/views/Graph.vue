@@ -18,6 +18,14 @@
 
 <script>
 export default {
+  created() {
+    axios
+      .get(`http://openapi.seoul.go.kr:8088/6a7471596670686238366148614672/xml/TbCorona19CountStatusJCG/1/7/`)
+      .then(({ data }) => {
+        console.log(data);
+      });
+  },
+
   data() {
     return {
       section: [
