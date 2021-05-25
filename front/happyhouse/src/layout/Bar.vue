@@ -31,9 +31,13 @@ export default {
   },
   methods: {
     logout() {
+      // this.$router.push("/");
+      // this.$router.go(this.$router.currentRoute);
+      this.$router.replace("/");
       localStorage.clear();
-      if (this.$route.path === "/mypage") this.$router.push("/");
-      this.$router.go(this.$router.currentRoute);
+      this.$router.go();
+
+      // if (!this.user)
     },
   },
 };

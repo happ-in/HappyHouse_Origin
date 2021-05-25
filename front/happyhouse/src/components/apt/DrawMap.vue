@@ -28,7 +28,8 @@ export default {
       const script = document.createElement("script");
       /* global kakao */
       script.onload = () => kakao.maps.load(this.initMap);
-      script.src = "http://dapi.kakao.com/v2/maps/sdk.js?autoload=false&appkey=d6752363187651fd8e9c4f66a13317cd";
+      script.src =
+        "http://dapi.kakao.com/v2/maps/sdk.js?autoload=false&appkey=d6752363187651fd8e9c4f66a13317cd";
       document.head.appendChild(script);
     }
   },
@@ -105,7 +106,10 @@ export default {
           "</div>";
 
         // 커스텀 오버레이가 표시될 위치입니다
-        var position = new kakao.maps.LatLng(this.aptDealList.data[i].lat, this.aptDealList.data[i].lng);
+        var position = new kakao.maps.LatLng(
+          this.aptDealList.data[i].lat,
+          this.aptDealList.data[i].lng
+        );
 
         // 커스텀 오버레이를 생성합니다
         var customOverlay = new kakao.maps.CustomOverlay({

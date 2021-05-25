@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h3 class="elevation-4 primary text-center">{{ dong }}에 대한 검색 결과입니다.</h3>
+    <h3 class="elevation-4 primary text-center"></h3>
 
     <div class="apt_list overflow-y-auto mx-auto">
       <template>
@@ -13,7 +13,23 @@
 
               <v-expansion-panel-content>
                 <v-divider class="mx-4 mb-4"></v-divider>
-                <v-row>
+                <v-row class="ml-1">
+                  <v-col>
+                    <v-img
+                      max-height="150"
+                      max-width="250"
+                      v-if="item.aptName == '인왕산아이파크'"
+                      src="@/assets/apart1.png"
+                    ></v-img>
+                    <v-img
+                      max-height="150"
+                      max-width="250"
+                      v-else
+                      src="@/assets/prepareImg.jpeg"
+                    ></v-img>
+                  </v-col>
+                </v-row>
+                <v-row class="text-center">
                   <v-col>
                     <div class="aptAttr">거래금액:<br /></div>
                     <div class="aptVal">{{ item.dealAmount }}만원</div>
@@ -55,7 +71,7 @@ export default {
     ...mapState(["apt", "dong", "aptDealList", "searchKeyword"]),
   },
   data() {
-    return { active_class: -1 };
+    return { active_class: -1, num: 0 };
   },
   mounted() {},
   methods: {

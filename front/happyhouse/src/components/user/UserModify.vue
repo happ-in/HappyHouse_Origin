@@ -9,13 +9,41 @@
         <v-card-title class="headline lighten-2"> 회원정보수정 </v-card-title>
 
         <v-container>
-          <v-text-field label="ID" v-model="id" hide-details="auto" ref="id" readonly></v-text-field>
-          <v-text-field type="password" label="Password" v-model="pw" hide-details="auto" ref="pw"></v-text-field>
-          <v-text-field label="Username" v-model="username" hide-details="auto" ref="username"></v-text-field>
-          <v-text-field label="E-mail" v-model="email" hide-details="auto" ref="email"></v-text-field>
+          <v-text-field
+            label="ID"
+            v-model="id"
+            hide-details="auto"
+            ref="id"
+            readonly
+          ></v-text-field>
+          <v-text-field
+            type="password"
+            label="Password"
+            v-model="pw"
+            hide-details="auto"
+            ref="pw"
+          ></v-text-field>
+          <v-text-field
+            label="Username"
+            v-model="username"
+            hide-details="auto"
+            ref="username"
+          ></v-text-field>
+          <v-text-field
+            label="E-mail"
+            v-model="email"
+            hide-details="auto"
+            ref="email"
+          ></v-text-field>
 
           <div class="d-flex">
-            <v-text-field label="Address" v-model="address" hide-details="auto" ref="address" disabled></v-text-field>
+            <v-text-field
+              label="Address"
+              v-model="address"
+              hide-details="auto"
+              ref="address"
+              disabled
+            ></v-text-field>
             <v-btn class="ml-5 mt-3" outlined @click="showApi">주소 찾기</v-btn>
           </div>
         </v-container>
@@ -88,7 +116,7 @@ export default {
           })
           .then(({ data }) => {
             localStorage.setItem("user", JSON.stringify(data));
-            this.$router.go(this.$router.currentRoute);
+            this.$router.go();
           });
       }
     },
