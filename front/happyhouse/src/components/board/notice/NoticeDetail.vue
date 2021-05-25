@@ -10,7 +10,7 @@
       <v-col cols="12" sm="9">
         <h2>{{ notice.title }}</h2>
       </v-col>
-      <template v-if="userid === notice.userid">
+      <template v-if="role === 'ADMIN'">
         <v-col cols="12" sm="2" class="text-right">
           <v-chip outlined @click="deleteNotice">삭제</v-chip>
         </v-col>
@@ -37,11 +37,13 @@ export default {
   data() {
     return {
       notice: [],
-      userid: "",
+      role: "",
     };
   },
   created() {
-    this.userid = JSON.parse(localStorage.getItem("user")).userid;
+    if (localStorage.getItem("user")) {
+      this.role = JSON.parse(localStorage.getItem("user")).role;
+    }
     axios.get(`http://localhost:8888/happyhouse/notice/${this.$route.params.no}`).then(({ data }) => {
       this.notice = data;
     });

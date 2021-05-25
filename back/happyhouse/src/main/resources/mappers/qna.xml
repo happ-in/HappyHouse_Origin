@@ -11,7 +11,7 @@
     </select>
 
     <select id="selectOne" parameterType="int" resultType="qna">
-        select  q.id, q.title, q.content, q.mod_date, u.username, f.folder, f.filename
+        select  q.id, q.title, q.content, q.mod_date, q.userid, u.username, f.folder, f.filename
         from    qna q
             left join fileinfo f on q.userid = f.userid
             join user u on q.userid = u.userid

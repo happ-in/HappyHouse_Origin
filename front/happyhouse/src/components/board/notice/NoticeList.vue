@@ -29,9 +29,7 @@
           <tr v-for="notice in notices" :key="notice.noticeno" class="text-center">
             <td>{{ notice.noticeno }}</td>
             <td>
-              <router-link :to="`/notice/detail/${notice.noticeno}`">{{
-                notice.title
-              }}</router-link>
+              <router-link :to="`/notice/detail/${notice.noticeno}`">{{ notice.title }}</router-link>
             </td>
             <td>{{ notice.regtime }}</td>
           </tr>
@@ -114,7 +112,8 @@ export default {
       }
     },
     moveCreate() {
-      if (JSON.parse(localStorage.getItem("user")).role === "ADMIN") {
+      let user = JSON.parse(localStorage.getItem("user"));
+      if (user && user.role === "ADMIN") {
         this.$router.push("/notice/create");
       } else {
         alert("관리자만 이용 가능합니다!");
