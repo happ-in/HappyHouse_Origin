@@ -79,7 +79,6 @@ export default {
             .post(`http://localhost:8888/happyhouse/comment`, {
               qna_id: this.$route.params.no,
               userid: JSON.parse(localStorage.getItem("user")).userid,
-              username: JSON.parse(localStorage.getItem("user")).username,
               content: this.message,
               tmpContent: this.message,
             })
