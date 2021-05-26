@@ -4,6 +4,7 @@
     <br />
     <v-container class="mb-3">
       <v-row>
+        <v-col cols="12" sm="1"></v-col>
         <v-col cols="12" sm="6">
           <svg xmlns="http://www.w3.org/2000/svg" version="1.1" baseProfile="tiny" viewBox="0 0 800 600" id="map">
             <g v-for="(item, i) in section" :key="i">
@@ -19,7 +20,7 @@
           </svg>
         </v-col>
 
-        <v-col cols="12" sm="6">
+        <v-col cols="12" sm="4">
           <v-row class="mt-3">
             <h3>오늘의 미세먼지 농도</h3>
           </v-row>
