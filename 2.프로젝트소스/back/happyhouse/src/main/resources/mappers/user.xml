@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ssafy.happyhouse.model.repository.UserRepository">
+    <select id="findByIdAndPassword" parameterType="user" resultType="user">
+        select  u.userid, u.username, u.userpwd, u.email, u.address, u.joindate, u.role, f.filename, f.folder
+        from    user u left join fileinfo f on u.userid=f.userid
+        where   u.userid=#{userid} and u.userpwd=#{userpwd}
+    </select>
+
+    <insert id="join" parameterType="user">
+        insert into user(userid, username, userpwd, email, address, joindate, role)
+        values(#{userid}, #{username}, #{userpwd}, #{email}, #{address}, now(), #{role})
+    </insert>
+
+    <select id="findByIdList" parameterType="string" resultType="user">
+        select  *
+        from    user
+        where   userid=#{userid}
+    </select>
+
+    <select id="findById" parameterType="string" resultType="user">
+        select  u.userid, u.username, u.userpwd, u.email, u.address, u.joindate, u.role, f.filename, f.folder
+        from    user u left join fileinfo f on u.userid=f.userid
+        where   u.userid=#{userid}
+    </select>
+
+    <update id="update" parameterType="user">
+        update  user
+            set username=#{username}, userpwd=#{userpwd}, email=#{email}, address=#{address}
+        where   userid=#{userid}
+    </update>
+
+    <delete id="delete" parameterType="string">
+        delete  from user
+        where   userid=#{userid}
+    </delete>
+
+    <select id="selectAll" resultType="User">
+        select  *
+        from    user
+        where   role='USER'
+    </select>
+
+    <update id="updatePassword" parameterType="map">
+        update  user
+            set userpwd=#{userpwd}
+        where   userid=#{userid}
+    </update>
+
+    <select id="findByIdAndEmail" parameterType="email" resultType="user">
+        select  *
+        from    user
+        where   userid=#{userid} and email=#{email}
+    </select>
+</mapper>

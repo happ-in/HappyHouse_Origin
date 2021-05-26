@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ssafy.happyhouse.model.repository.NoticeRepository">
+    <insert id="insert" parameterType="notice">
+        insert into notice(userid, title, content, regtime)
+        values (#{userid}, #{title}, #{content}, now())
+    </insert>
+
+    <select id="selectAll" parameterType="int" resultType="notice">
+        select  *
+        from    notice
+        order by regtime desc
+        limit   10
+        offset  #{offset}
+    </select>
+
+    <select id="selectOne" parameterType="int" resultType="notice">
+        select  *
+        from    notice
+        where   noticeno=#{noticeno}
+    </select>
+
+    <select id="count" resultType="int">
+        select  count(*)
+        from    notice
+    </select>
+
+    <select id="findByKeyword" parameterType="search" resultType="notice">
+        select  *
+        from    notice
+        <if test="title == null || title == ''">
+            where content like concat('%', #{content}, '%')
+        </if>
+        <if test="content == null || content == ''">
+            where title like concat('%', #{title}, '%')
+        </if>
+        order by regtime desc
+        limit   10
+        offset  #{offset}
+    </select>
+
+    <select id="findByKeywordCount" parameterType="search" resultType="int">
+        select  count(*)
+        from    notice
+        <if test="title == null || title == ''">
+            where content like concat('%', #{content}, '%')
+        </if>
+        <if test="content == null || content == ''">
+            where title like concat('%', #{title}, '%')
+        </if>
+    </select>
+
+
+    <delete id="delete" parameterType="int">
+        delete
+        from    notice
+        where   noticeno=#{noticeno}
+    </delete>
+</mapper>

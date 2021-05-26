@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ssafy.happyhouse.model.repository.AptRepository">
+    <select id="findByDong" parameterType="string" resultType="apt">
+        select  i.no, i.dong, i.aptname, i.code, i.jibun, i.lat, i.lng, d.dealamount, d.buildyear,d.dealyear,d.dealmonth, d.dealday, d.area, d.floor
+        from    houseinfo i right join housedeal d on i.dong = d.dong and i.aptname = d.aptname
+        where   i.dong=#{dong}
+    </select>
+
+    <select id="findByDealAmount" parameterType="aptprice" resultType="apt">
+        select  i.no, i.dong, i.aptname, i.code, i.jibun, i.lat, i.lng, d.dealamount, d.buildyear,d.dealyear,d.dealmonth, d.dealday, d.area, d.floor
+        from    houseinfo i right join housedeal d on i.dong = d.dong and i.aptname = d.aptname
+        where   i.dong=#{dong}
+                and
+        <![CDATA[
+                cast(replace(d.dealAmount, ',', '') as unsigned) >= #{min} and cast(replace(d.dealAmount, ',', '') as unsigned) <= #{max}
+        ]]>
+        order by replace(d.dealAmount, ',', '')
+    </select>
+</mapper>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ssafy.happyhouse.model.repository.FileRepository">
+    <insert id="save" parameterType="fileinfo">
+        insert into fileInfo(userid, folder, filename)
+        values(#{userid}, #{folder}, #{filename})
+    </insert>
+
+    <select id="findById" parameterType="string" resultType="fileinfo">
+        select  *
+        from    fileinfo
+        where   userid=#{userid}
+    </select>
+
+    <update id="update" parameterType="string">
+        update fileinfo
+            set folder=#{folder},
+                filename=#{filename}
+        where   userid=#{userid}
+    </update>
+
+    <delete id="delete" parameterType="string">
+        delete  from fileinfo
+        where   userid=#{userid}
+    </delete>
+</mapper>

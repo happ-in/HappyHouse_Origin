@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ssafy.happyhouse.model.repository.QnaRepository">
+    <select id="selectAll" parameterType="int" resultType="qna">
+        select  q.id, q.title, q.content, q.mod_date, u.userid, u.username
+        from    qna q join user u on q.userid = u.userid
+        order by mod_date desc
+        limit   10
+        offset  #{offset}
+    </select>
+
+    <select id="selectOne" parameterType="int" resultType="qna">
+        select  q.id, q.title, q.content, q.mod_date, q.userid, u.username, f.folder, f.filename
+        from    qna q
+            left join fileinfo f on q.userid = f.userid
+            join user u on q.userid = u.userid
+        where   q.id=#{id}
+    </select>
+
+    <insert id="insert" parameterType="qna">
+        insert into qna(title, content, userid, reg_date, mod_date)
+        values(#{title}, #{content}, #{userid}, now(), now())
+    </insert>
+
+    <update id="update" parameterType="qna">
+        update  qna
+            set title=#{title}, content=#{content}, mod_date=now()
+        where   id=#{id}
+    </update>
+
+    <delete id="delete" parameterType="int">
+        delete  from qna
+        where   id=#{id}
+    </delete>
+
+    <select id="count" resultType="int">
+        select  count(*)
+        from    qna
+    </select>
+    
+    <select id="findByKeyword" parameterType="search" resultType="qna">
+        select  *
+        from    qna
+        <if test="title == null || title == ''">
+            where content like concat('%', #{content}, '%')
+        </if>
+        <if test="content == null || content == ''">
+            where title like concat('%', #{title}, '%')
+        </if>
+        order by mod_date desc
+        limit   10
+        offset  #{offset}
+    </select>
+
+    <select id="findByKeywordCount" parameterType="search" resultType="int">
+        select  count(*)
+        from    qna
+        <if test="title == null || title == ''">
+            where content like concat('%', #{content}, '%')
+        </if>
+        <if test="content == null || content == ''">
+            where title like concat('%', #{title}, '%')
+        </if>
+    </select>
+
+</mapper>
