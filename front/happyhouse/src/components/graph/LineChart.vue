@@ -45,7 +45,7 @@ export default {
       datacollection: {
         //Data to be represented on x-axis
         labels: ["1", "2", "3", "4", "5", "6", "7"],
-        datasets: [{}],
+        datasets: [],
       },
       //Chart.js options that controls the appearance of the chart
       options: {
