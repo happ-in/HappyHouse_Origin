@@ -6,7 +6,7 @@ Vue.use(VueRouter);
 const routes = [
   {
     path: "/graph",
-    component: () => import("@/views/Graph2.vue"),
+    component: () => import("@/views/Graph.vue"),
   },
   {
     path: "/",

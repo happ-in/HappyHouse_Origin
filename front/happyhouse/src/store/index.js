@@ -17,16 +17,25 @@ export default new Vuex.Store({
     dong: Object, // 현재 선택된 동
     apt: Object, // 현재 선택된 아파트의 list num
     searchKeyword: Object, // 검색하려는 키워드
+    coronaDong: Object, // 선택된 코로나 동
 
     range: [],
     dongs: [], // 구에 해당하는 동 목록
     aptDealList: [], // 동에 해당하는 거래 목록
+
+    corona: [], // 코로나 정보
   },
   mutations: {
+    SELECT_CORONA_DONG(state, data) {
+      state.coronaDong = data;
+    },
+    GET_DONG_CORONA(state, data) {
+      console.log(data);
+      state.corona = data;
+    },
     GET_PRICE_RANGE(state, range) {
       state.range = range;
     },
-
     GET_KEYWORD(state, key) {
       state.searchKeyword = key;
     },
@@ -47,6 +56,19 @@ export default new Vuex.Store({
     },
   },
   actions: {
+    selectCoronaDong({ commit }, dong) {
+      commit("SELECT_CORONA_DONG", dong);
+    },
+    getDongCorona({ commit }) {
+      axios
+      .get(
+        `http://openapi.seoul.go.kr:8088/6a7471596670686238366148614672/json/TbCorona19CountStatusJCG/1/7/`
+      )
+      .then(({ data }) => {
+        commit("GET_DONG_CORONA", data);
+      });
+    },
+
     getPriceRange({ commit }, range) {
       const SERVICE_URL = "http://localhost:8888/happyhouse/apt/price";
 
