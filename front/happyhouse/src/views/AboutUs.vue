@@ -5,11 +5,14 @@
     <br />
     <br />
     <br />
-    <img
-      src="https://www.marcusmillichap.com/-/media/Images/MM/MM%20Home/mm-home-mm-advantage-image%20png.png?h=904&w=1236&rev=29b69a7492ce45cdad216891dccb07bf&hash=8E348BFCD48C3004933CF770A5B6EBEA"
-    />
+
     <section class="index-part-2">
       <div class="container">
+        <div class="text-center">
+          <img
+            src="https://www.marcusmillichap.com/-/media/Images/MM/MM%20Home/mm-home-mm-advantage-image%20png.png?h=904&w=1236&rev=29b69a7492ce45cdad216891dccb07bf&hash=8E348BFCD48C3004933CF770A5B6EBEA"
+          />
+        </div>
         <div class="text-center">
           <img src="@/assets/logo.png" alt="" />
         </div>
@@ -134,7 +137,7 @@
 export default {};
 </script>
 
-<style>
+<style scoped>
 html,
 body {
   min-height: 100%;
