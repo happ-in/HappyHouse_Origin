@@ -25,7 +25,7 @@ export default {
         .post("http://localhost:8888/happyhouse/notice", {
           userid: JSON.parse(localStorage.getItem("user")).userid,
           title: this.title,
-          content: this.content,
+          content: this.content.replace(/(\r\n|\n|\n\n)/gi, "<br />"),
         })
         .then(() => {
           alert("공지사항이 등록됐습니다.");

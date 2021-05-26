@@ -26,9 +26,7 @@
 
     <br />
 
-    <div class="border">
-      {{ notice.content }}
-    </div>
+    <div class="border" v-html="notice.content"></div>
   </v-container>
 </template>
 <script>
