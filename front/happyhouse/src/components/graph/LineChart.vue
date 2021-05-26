@@ -32,6 +32,7 @@ export default {
         this.corona.TbCorona19CountStatusJCG.row.forEach((element) => {
           tmp.data.push(element[this.coronaDong]);
         });
+        tmp.data = tmp.data.reverse();
         this.datacollection.datasets.push(tmp);
         this.renderChart(this.datacollection, this.options);
       }
