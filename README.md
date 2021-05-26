@@ -1,3 +1,6 @@
-# HappyHouse_final
+# 😀 HappyHouse_final
 
-HappyHouse Final 박혜빈, 황성현
+
+<img src = "https://i.imgur.com/pTP5x2C.png"><br>
+### HappyHouse Final 박혜빈, 황성현
+
