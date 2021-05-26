@@ -18,6 +18,10 @@ const routes = [
     component: () => import("@/views/Apt.vue"),
   },
   {
+    path: "/aboutus",
+    component: () => import("@/views/AboutUs.vue"),
+  },
+  {
     path: "/qna",
     component: () => import("@/views/Qna.vue"),
     children: [
