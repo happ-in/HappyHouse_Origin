@@ -19,18 +19,23 @@ export default {
           "rgba(13,100,255,0.3)",
           "rgba(255,18,255,0.3)",
           "rgba(35,177,255,0.3)",
+          "rgba(235, 15, 22, 1)",
+          "rgba(243, 124, 73, 1)",
+          "rgba(111, 129, 246, 1)",
         ];
+
         var tmp = {
-          label: this.coronaDong,
+          label: this.coronaDong.gu,
           backgroundColor: colors[Math.floor(Math.random() * colors.length)],
           borderWidth: 1,
           //Data to be represented on y-axis
           data: [],
         };
+
         this.dongs.push(this.coronaDong);
 
         this.corona.TbCorona19CountStatusJCG.row.forEach((element) => {
-          tmp.data.push(element[this.coronaDong]);
+          tmp.data.push(element[this.coronaDong.id]);
         });
         tmp.data = tmp.data.reverse();
         this.datacollection.datasets.push(tmp);
