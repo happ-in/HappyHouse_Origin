@@ -17,7 +17,7 @@
         ></v-text-field>
       </v-col>
     </v-row>
-    <v-simple-table style="height: 600px">
+    <v-simple-table>
       <template v-slot:default>
         <thead>
           <tr>

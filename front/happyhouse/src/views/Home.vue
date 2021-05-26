@@ -20,7 +20,7 @@
           </v-col>
           <v-col cols="12" sm="6">
             <v-card>
-              <v-img src="@/assets/seoulChart.png" />
+              <h1 class="cookie-font" @click="moveToGraph">우리동네 환경정보🚨</h1>
             </v-card>
             <v-card class="mt-6 pa-1">
               <iframe
@@ -48,11 +48,15 @@ import DongList from "@/components/home/DongList.vue";
 
 export default {
   name: "Home",
-
   components: {
     NewsList,
     DrawMap,
     DongList,
+  },
+  methods: {
+    moveToGraph() {
+      this.$router.push("/graph");
+    },
   },
 };
 </script>
@@ -60,8 +64,7 @@ export default {
 <style scoped>
 @font-face {
   font-family: "this_is_font_name";
-  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_twelve@1.1/Cafe24Simplehae.woff")
-    format("woff");
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_twelve@1.1/Cafe24Simplehae.woff") format("woff");
 
   font-weight: normal;
   font-style: normal;
@@ -70,5 +73,16 @@ export default {
 .header_title {
   text-align: center;
   font-family: this_is_font_name;
+}
+@font-face {
+  font-family: "CookieRunOTF-Bold";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_twelve@1.0/CookieRunOTF-Bold00.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+.cookie-font {
+  text-align: center;
+  font-family: CookieRunOTF-Bold;
+  cursor: pointer;
 }
 </style>

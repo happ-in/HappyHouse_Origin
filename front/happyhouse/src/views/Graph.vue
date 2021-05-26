@@ -1,43 +1,82 @@
 <template>
   <v-container class="text-center">
-    <v-row>
-      <v-col cols="12" sm="6">
-        <svg xmlns="http://www.w3.org/2000/svg" version="1.1" baseProfile="tiny" viewBox="0 0 800 600" id="map">
-          <g v-for="(item, i) in section" :key="i">
-            <path
-              :id="item.id"
-              :d="item.d"
-              class="land"
-              v-tooltip="'<h3>' + item.gu + '</h3> ' + title + '<strong>' + item.count + '</strong>명'"
-              @click="selectGu(item)"
-              :filter="`opacity(` + item.percent + `%)`"
-            />
-          </g>
-        </svg>
-      </v-col>
+    <h1 class="cookie-font">우리동네 환경정보🚨</h1>
+    <br />
+    <v-container class="mb-3">
+      <v-row>
+        <v-col cols="12" sm="6">
+          <svg xmlns="http://www.w3.org/2000/svg" version="1.1" baseProfile="tiny" viewBox="0 0 800 600" id="map">
+            <g v-for="(item, i) in section" :key="i">
+              <path
+                :id="item.id"
+                :d="item.d"
+                class="land"
+                v-tooltip="'<h3>' + item.gu + '</h3> ' + title + '<strong>' + item.count + '</strong>명'"
+                @click="selectGu(item)"
+                :filter="`opacity(` + item.percent + `%)`"
+              />
+            </g>
+          </svg>
+        </v-col>
 
-      <v-col cols="12" sm="6">
-        <v-row class="mt-3">
-          <h3>오늘의 미세먼지는?</h3>
-        </v-row>
+        <v-col cols="12" sm="6">
+          <v-row class="mt-3">
+            <h3>오늘의 미세먼지 농도</h3>
+          </v-row>
 
-        <v-row>
-          <v-chip class="ma-2" color="primary" label>
-            <v-icon left> mdi-face-mask-outline </v-icon>
-            미세먼지 :
-            {{ pm10 }} ㎍/㎥
-          </v-chip>
-          <v-chip class="ma-2" color="primary" label>
-            <v-icon left> mdi-face-mask-outline </v-icon>
-            초미세먼지 :
-            {{ pm25 }} ㎍/㎥
-          </v-chip>
-        </v-row>
-        <v-row>
-          <line-chart></line-chart>
-        </v-row>
-      </v-col>
-    </v-row>
+          <v-row>
+            <v-chip class="ma-2" color="primary" label v-if="pm10 < 30">
+              <v-icon left> mdi-emoticon-excited-outline </v-icon>
+              미세먼지 :
+              {{ pm10 }} ㎍/㎥
+            </v-chip>
+            <v-chip class="ma-2" color="success" label v-else-if="pm10 < 80">
+              <v-icon left> mdi-emoticon-happy-outline </v-icon>
+              미세먼지 :
+              {{ pm10 }} ㎍/㎥
+            </v-chip>
+            <v-chip class="ma-2" color="warning" label v-else-if="pm10 < 150">
+              <v-icon left> mdi-emoticon-sad-outline </v-icon>
+              미세먼지 :
+              {{ pm10 }} ㎍/㎥
+            </v-chip>
+            <v-chip class="ma-2" color="error" label v-else>
+              <v-icon left> mdi-emoticon-devil-outline </v-icon>
+              미세먼지 :
+              {{ pm10 }} ㎍/㎥
+            </v-chip>
+
+            <v-chip class="ma-2" color="primary" label v-if="pm25 < 15">
+              <v-icon left> mdi-emoticon-excited-outline </v-icon>
+              초미세먼지 :
+              {{ pm25 }} ㎍/㎥
+            </v-chip>
+            <v-chip class="ma-2" color="success" label v-else-if="pm25 < 35">
+              <v-icon left> mdi-emoticon-happy-outline </v-icon>
+              초미세먼지 :
+              {{ pm25 }} ㎍/㎥
+            </v-chip>
+            <v-chip class="ma-2" color="warning" label v-else-if="pm25 < 75">
+              <v-icon left> mdi-emoticon-sad-outline </v-icon>
+              초미세먼지 :
+              {{ pm25 }} ㎍/㎥
+            </v-chip>
+            <v-chip class="ma-2" color="error" label v-else>
+              <v-icon left> mdi-emoticon-devil-outline </v-icon>
+              초미세먼지 :
+              {{ pm25 }} ㎍/㎥
+            </v-chip>
+          </v-row>
+          <v-row><br /></v-row>
+          <v-row>
+            <h3>코로나 확진자 누적수 변화랑</h3>
+          </v-row>
+          <v-row>
+            <line-chart></line-chart>
+          </v-row>
+        </v-col>
+      </v-row>
+    </v-container>
   </v-container>
 </template>
 
@@ -350,5 +389,16 @@ path:hover {
   color: white;
   border-radius: 16px;
   padding: 5px 10px 4px;
+}
+@font-face {
+  font-family: "CookieRunOTF-Bold";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_twelve@1.0/CookieRunOTF-Bold00.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+.cookie-font {
+  font-size: 50px;
+  text-align: center;
+  font-family: CookieRunOTF-Bold;
 }
 </style>

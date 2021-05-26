@@ -3,14 +3,14 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ssafy.happyhouse.model.repository.QnaCommentRepository">
     <select id="searchAll" parameterType="int" resultType="qnacomment">
-        select  *
-        from    comment
+        select  c.id, c.qna_id, c.content, c.regtime, c.userid, u.username
+        from    comment c join user u on c.userid=u.userid
         where   qna_id=#{qna_id}
     </select>
 
     <insert id="insert" parameterType="qnacomment">
-        insert into comment(qna_id, userid, username, content, regtime)
-        values (#{qna_id}, #{userid}, #{username}, #{content}, now())
+        insert into comment(qna_id, userid, content, regtime)
+        values (#{qna_id}, #{userid}, #{content}, now())
     </insert>
 
     <delete id="delete" parameterType="int">
