@@ -33,8 +33,8 @@ export default {
     logout() {
       // this.$router.push("/");
       // this.$router.go(this.$router.currentRoute);
+      localStorage.removeItem("user");
       this.$router.replace("/");
-      localStorage.clear();
       this.$router.go();
 
       // if (!this.user)
