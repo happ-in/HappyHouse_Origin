@@ -30,7 +30,7 @@ export default new Vuex.Store({
       state.coronaDong = data;
     },
     GET_DONG_CORONA(state, data) {
-      console.log(data);
+      // console.log(data);
       state.corona = data;
     },
     GET_PRICE_RANGE(state, range) {
@@ -61,12 +61,10 @@ export default new Vuex.Store({
     },
     getDongCorona({ commit }) {
       axios
-      .get(
-        `http://openapi.seoul.go.kr:8088/6a7471596670686238366148614672/json/TbCorona19CountStatusJCG/1/7/`
-      )
-      .then(({ data }) => {
-        commit("GET_DONG_CORONA", data);
-      });
+        .get(`http://openapi.seoul.go.kr:8088/6a7471596670686238366148614672/json/TbCorona19CountStatusJCG/1/7/`)
+        .then(({ data }) => {
+          commit("GET_DONG_CORONA", data);
+        });
     },
 
     getPriceRange({ commit }, range) {

@@ -70,7 +70,7 @@ export default {
           });
         });
       });
-    console.log(this.section);
+    // console.log(this.section);
   },
   data() {
     return {
